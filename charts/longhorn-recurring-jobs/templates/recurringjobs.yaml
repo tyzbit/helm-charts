@@ -1,44 +1,82 @@
+{{- /* $generatedJobs is fed into a range to generate each RecurringJob */}}
 {{- $generatedJobs := dict -}}
+
+{{- /* $generatedGroups is a dict whose keys are the names of the generated jobs
+      and the values of those keys are an array of group names */}}
 {{- $generatedGroups := dict -}}
+{{- /* See below for an example of these objects */}}
+
 {{- range $groupName, $groupSettings := .Values.groups -}}
   {{- range $jobType, $job := $groupSettings -}}
     {{- range $job -}}
-      {{- $concurrency := ( .concurrency | default $.Values.defaultConcurrency ) -}}
-      {{- $jobName := printf "%s-%s-retain-%s-concurrency-%s" $jobType .interval (.retain | toString) ( $concurrency | toString ) -}}
-      {{- $jobProperties := dict -}}
       {{- $minute := "*" }}
       {{- $hour := "*" }}
       {{- $day := "*" }}
+      
       {{- if (regexMatch "[0-9]+m" .interval) -}}
         {{- if ne "1m" .interval -}}
           {{- $minute = printf "*/%s" (trimSuffix "m" .interval | toString) -}}
         {{- end -}}
       {{- end -}}
+
       {{- if (regexMatch "[0-9]+h" .interval) -}}
+        {{- /* TODO: skew this over the jobs so they don't all run on the hour */}}
         {{- $minute = "0" -}}
         {{- if ne "1h" .interval -}}
           {{- $hour = printf "0/%s" (trimSuffix "h" .interval | toString) -}}
         {{- end -}}
       {{- end -}}
+
       {{- if (regexMatch "[0-9]+d" .interval) -}}
+        {{- /* TODO: skew this over the jobs so they don't all run at midnight */}}
         {{- $minute = "0" -}}
         {{- $hour = "0" -}}
         {{- if ne "1d" .interval -}}
           {{- $day = printf "*/%s" (trimSuffix "d" .interval | toString) -}}
         {{- end -}}
       {{- end -}}
+
       {{- $cron := printf "%s %s %s * *" $minute $hour $day -}}
+
+      {{- $concurrency := ( .concurrency | default $.Values.defaultConcurrency ) -}}
+
+      {{- /* example $jobName: snapshot-10m-retain-1-concurrency-4 */}}
+      {{- $jobName := printf "%s-%s-retain-%s-concurrency-%s" $jobType .interval (.retain | toString) ( $concurrency | toString ) -}}
+
+      {{- $jobProperties := dict -}}
       {{- $_ := set $jobProperties "interval" .interval -}}
       {{- $_ := set $jobProperties "cron" $cron -}}
-      {{- $_ := set $jobProperties "retain" .retain -}}
       {{- $_ := set $jobProperties "jobType" $jobType -}}
+      {{- $_ := set $jobProperties "retain" .retain -}}
       {{- $_ := set $jobProperties "concurrency" $concurrency -}}
+
       {{- $_ := set $generatedJobs $jobName $jobProperties -}}
       {{- $existingGroupList := get $generatedGroups $jobName | default list -}}
       {{- $_ := set $generatedGroups $jobName ( append $existingGroupList $groupName | uniq ) -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
+
+{{- /*
+What $generatedJobs looks like
+$generatedJobs:
+  snapshot-10m-retain-1-concurrency-4:
+    interval: 10m
+    cron: "0/10 * * * *"
+    retain: 1
+    jobType: snapshot
+    concurrency: 4
+  snapshot-1h-retain-1-concurrency-4:
+    [...]
+
+What $generatedGroups looks like
+$generatedGroups:
+  snapshot-10m-retain-1-concurrency-4:
+    - ExampleGroup
+    - OtherGroup
+  snapshot-1h-retain-1-concurrency-4:
+    - [...]
+*/}}
 
 {{- range $name, $properties := $generatedJobs }}
 apiVersion: longhorn.io/v1beta1
