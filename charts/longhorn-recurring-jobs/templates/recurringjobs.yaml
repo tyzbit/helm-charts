@@ -4,7 +4,7 @@
   {{- range $jobType, $job := $groupSettings -}}
     {{- range $job -}}
       {{- $concurrency := ( .concurrency | default $.Values.defaultConcurrency ) -}}
-      {{- $jobName := printf "%s-%s_retain-%s_concurrency-%s" $jobType .interval (.retain | toString) ( $concurrency | toString ) -}}
+      {{- $jobName := printf "%s-%s-retain-%s-concurrency-%s" $jobType .interval (.retain | toString) ( $concurrency | toString ) -}}
       {{- $jobProperties := dict -}}
       {{- $minute := "*" }}
       {{- $hour := "*" }}
