@@ -2,7 +2,7 @@ namespace: longhorn-system
 
 defaultConcurrency: 4
 
-# profile names must start and end with alnum, and can only have [A-Za-z0-9-_.]
+# group names must start and end with alnum, and can only have [A-Za-z0-9-_.]
 groups:
   "Database":
     snapshot:
