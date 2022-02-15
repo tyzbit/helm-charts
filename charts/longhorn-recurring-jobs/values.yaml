@@ -1,0 +1,15 @@
+namespace: longhorn-system
+
+defaultConcurrency: 4
+
+# profile names must start and end with alnum, and can only have [A-Za-z0-9-_.]
+groups:
+  "Database":
+    snapshot:
+      - interval: 10m
+        retain: 6
+    backup:
+      - interval: 1h
+        retain: 6
+      - interval: 6h
+        retain: 8

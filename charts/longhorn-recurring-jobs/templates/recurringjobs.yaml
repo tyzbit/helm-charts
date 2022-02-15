@@ -1,0 +1,61 @@
+{{- $generatedJobs := dict -}}
+{{- $generatedGroups := dict -}}
+{{- range $groupName, $groupSettings := .Values.groups -}}
+  {{- range $jobType, $job := $groupSettings -}}
+    {{- range $job -}}
+      {{- $concurrency := ( .concurrency | default $.Values.defaultConcurrency ) -}}
+      {{- $jobName := printf "%s-%s_retain-%s_concurrency-%s" $jobType .interval (.retain | toString) ( $concurrency | toString ) -}}
+      {{- $jobProperties := dict -}}
+      {{- $minute := "*" }}
+      {{- $hour := "*" }}
+      {{- $day := "*" }}
+      {{- if (regexMatch "[0-9]+m" .interval) -}}
+        {{- if ne "1m" .interval -}}
+          {{- $minute = printf "*/%s" (trimSuffix "m" .interval | toString) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if (regexMatch "[0-9]+h" .interval) -}}
+        {{- $minute = "0" -}}
+        {{- if ne "1h" .interval -}}
+          {{- $hour = printf "0/%s" (trimSuffix "h" .interval | toString) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if (regexMatch "[0-9]+d" .interval) -}}
+        {{- $minute = "0" -}}
+        {{- $hour = "0" -}}
+        {{- if ne "1d" .interval -}}
+          {{- $day = printf "*/%s" (trimSuffix "d" .interval | toString) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $cron := printf "%s %s %s * *" $minute $hour $day -}}
+      {{- $_ := set $jobProperties "interval" .interval -}}
+      {{- $_ := set $jobProperties "cron" $cron -}}
+      {{- $_ := set $jobProperties "retain" .retain -}}
+      {{- $_ := set $jobProperties "jobType" $jobType -}}
+      {{- $_ := set $jobProperties "concurrency" $concurrency -}}
+      {{- $_ := set $generatedJobs $jobName $jobProperties -}}
+      {{- $existingGroupList := get $generatedGroups $jobName | default list -}}
+      {{- $_ := set $generatedGroups $jobName ( append $existingGroupList $groupName | uniq ) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range $name, $properties := $generatedJobs }}
+apiVersion: longhorn.io/v1beta1
+kind: RecurringJob
+metadata:
+  name: {{ $name }}
+  namespace: {{ $.Values.namespace }}
+spec:
+  cron: {{ $properties.cron | quote }}
+  task: {{ $properties.jobType }}
+  groups:
+  {{- range (get $generatedGroups $name ) }}
+    - {{ . }}
+  {{- end }}
+  retain: {{ $properties.retain }}
+  concurrency: {{ $properties.concurrency }}
+  labels:
+    jobName: {{ $name }}
+---
+{{- end }}
