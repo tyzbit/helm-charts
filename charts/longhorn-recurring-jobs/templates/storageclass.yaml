@@ -18,7 +18,7 @@ allowVolumeExpansion: {{ $allowVolumeExpansion }}
 parameters:
   numberOfReplicas: "{{ $property.numberOfReplicas | default $.Values.defaultNumberOfReplicas }}"
   staleReplicaTimeout: "{{ $property.staleReplicaTimeout | default $.Values.defaultStaleReplicaTimeout }}"
-  recurringJobSelector: |
+  recurringJobSelector: >-
     [{
       "name":"{{ $group }}",
       "isGroup":true,
