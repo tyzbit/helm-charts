@@ -9,21 +9,23 @@
 {{- /* First round, populate $generatedJobs and $generatedGroups */}}
 {{- range $groupName, $groupSettings := .Values.groups -}}
   {{- range $jobType, $job := $groupSettings -}}
-    {{- range $job -}}
-      {{- $concurrency := ( .concurrency | default $.Values.defaultConcurrency ) -}}
+    {{- if or (eq $jobType "snapshot") (eq $jobType "backup") -}}
+      {{- range $job -}}
+        {{- $concurrency := ( .concurrency | default $.Values.defaultConcurrency ) -}}
 
-      {{- /* Example $jobName: snapshot-10m-retain-1-concurrency-4 */}}
-      {{- $jobName := printf "%s-%s-retain-%s-concurrency-%s" $jobType .interval (.retain | toString) ( $concurrency | toString ) -}}
+        {{- /* Example $jobName: snapshot-10m-retain-1-concurrency-4 */}}
+        {{- $jobName := printf "%s-%s-retain-%s-concurrency-%s" $jobType .interval (.retain | toString) ( $concurrency | toString ) -}}
 
-      {{- $jobProperties := dict -}}
-      {{- $_ := set $jobProperties "interval" .interval -}}
-      {{- $_ := set $jobProperties "jobType" $jobType -}}
-      {{- $_ := set $jobProperties "retain" .retain -}}
-      {{- $_ := set $jobProperties "concurrency" $concurrency -}}
+        {{- $jobProperties := dict -}}
+        {{- $_ := set $jobProperties "interval" .interval -}}
+        {{- $_ := set $jobProperties "jobType" $jobType -}}
+        {{- $_ := set $jobProperties "retain" .retain -}}
+        {{- $_ := set $jobProperties "concurrency" $concurrency -}}
 
-      {{- $_ := set $generatedJobs $jobName $jobProperties -}}
-      {{- $existingGroupList := get $generatedGroups $jobName | default list -}}
-      {{- $_ := set $generatedGroups $jobName ( append $existingGroupList $groupName | uniq ) -}}
+        {{- $_ := set $generatedJobs $jobName $jobProperties -}}
+        {{- $existingGroupList := get $generatedGroups $jobName | default list -}}
+        {{- $_ := set $generatedGroups $jobName ( append $existingGroupList $groupName | uniq ) -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
@@ -34,56 +36,58 @@
 {{- /* Second round, calculate cron expressions for the jobs based on how many jobs there are */}}
 {{- range $groupName, $groupSettings := .Values.groups -}}
   {{- range $jobType, $job := $groupSettings -}}
-    {{- range $job -}}
-      {{- $concurrency := ( .concurrency | default $.Values.defaultConcurrency ) -}}
-      {{- /* Example $jobName: snapshot-10m-retain-1-concurrency-4 */}}
-      {{- $jobName := printf "%s-%s-retain-%s-concurrency-%s" $jobType .interval (.retain | toString) ( $concurrency | toString ) -}}
+    {{- if or (eq $jobType "snapshot") (eq $jobType "backup") -}}
+      {{- range $job -}}
+        {{- $concurrency := ( .concurrency | default $.Values.defaultConcurrency ) -}}
+        {{- /* Example $jobName: snapshot-10m-retain-1-concurrency-4 */}}
+        {{- $jobName := printf "%s-%s-retain-%s-concurrency-%s" $jobType .interval (.retain | toString) ( $concurrency | toString ) -}}
 
-      {{- $jobProperties := get $generatedJobs $jobName -}}
+        {{- $jobProperties := get $generatedJobs $jobName -}}
 
-      {{- /* These values will always get overwritten, we just need an initial value */}}
-      {{- $minute := "99" -}}
-      {{- $hour := "99" -}}
-      {{- $day := "99" -}}
+        {{- /* These values will always get overwritten, we just need an initial value */}}
+        {{- $minute := "99" -}}
+        {{- $hour := "99" -}}
+        {{- $day := "99" -}}
 
-      {{- /* Here we set the minute for cron expressions that have other fields set */}}
-      {{- if not (regexMatch "[0-9]+m" .interval) -}}
-        {{- /* Use modulus to pick a minute between 0 and 59 */}}
-        {{- $minute = (toString (index (untilStep 0 59 5) (mod $jobIndex 11))) -}}
-      {{- else -}}
-        {{- $minuteInterval := trimSuffix "m" .interval | toString -}}
-        {{- /* Use modulus to pick a minute between 0 and 59 */}}
-        {{- $customMinuteStart := index (untilStep 0 59 1) (mod $jobIndex $minuteInterval) -}}
-        {{- $minute = (printf "%s/%s" ($customMinuteStart | toString) ($minuteInterval | toString)) -}}
+        {{- /* Here we set the minute for cron expressions that have other fields set */}}
+        {{- if not (regexMatch "[0-9]+m" .interval) -}}
+          {{- /* Use modulus to pick a minute between 0 and 59 */}}
+          {{- $minute = (toString (index (untilStep 0 59 5) (mod $jobIndex 11))) -}}
+        {{- else -}}
+          {{- $minuteInterval := trimSuffix "m" .interval | toString -}}
+          {{- /* Use modulus to pick a minute between 0 and 59 */}}
+          {{- $customMinuteStart := index (untilStep 0 59 1) (mod $jobIndex $minuteInterval) -}}
+          {{- $minute = (printf "%s/%s" ($customMinuteStart | toString) ($minuteInterval | toString)) -}}
+        {{- end -}}
+        
+        {{- if or (regexMatch "[0-9]+m" .interval) (eq "1h" .interval) -}}
+          {{- $hour = "*" -}}
+        {{- /* Here we set the hour for cron expressions that have days or more set */}}
+        {{- else if not (regexMatch "[0-9]+h" .interval) -}}
+          {{- $hour = toString (index (untilStep 0 23 2) (mod $jobIndex 11)) -}}
+        {{- else -}}
+          {{- $hourInterval := trimSuffix "h" .interval | toString -}}
+          {{- /* Use modulus to pick an hour between 0 and 23 */}}
+          {{- $customHourStart := index (untilStep 0 23 1) (mod $jobIndex $hourInterval) -}}
+          {{- $hour = (printf "%s/%s" ($customHourStart | toString) ($hourInterval | toString)) -}}
+        {{- end -}}
+
+        {{- $day := "*" -}}
+        {{- /* If minutes, hours or '1d' is set, $day = "*" */}}
+        {{- if or (or (regexMatch "[0-9]+m" .interval) (regexMatch "[0-9]+h" .interval) (eq "1d" .interval)) -}}
+          {{- $day = "*" -}}
+        {{- else -}}
+          {{- $dayInterval := trimSuffix "d" .interval | toString -}}
+          {{- /* Use modulus to pick a day between 0 and 6 */}}
+          {{- $customDayStart := index (untilStep 0 6 1) (mod $jobIndex $dayInterval) -}}
+          {{- $day = (printf "%s/%s" ($customDayStart | toString) ($dayInterval | toString)) -}}
+        {{- end -}}
+
+        {{- $cron := printf "%s %s %s * *" $minute $hour $day -}}
+        {{- $_ := set $jobProperties "cron" $cron -}}
+        {{- $_ := set $generatedJobs $jobName $jobProperties -}}
+        {{- $jobIndex = add1 $jobIndex -}}
       {{- end -}}
-      
-      {{- if or (regexMatch "[0-9]+m" .interval) (eq "1h" .interval) -}}
-        {{- $hour = "*" -}}
-      {{- /* Here we set the hour for cron expressions that have days or more set */}}
-      {{- else if not (regexMatch "[0-9]+h" .interval) -}}
-        {{- $hour = toString (index (untilStep 0 23 2) (mod $jobIndex 11)) -}}
-      {{- else -}}
-        {{- $hourInterval := trimSuffix "h" .interval | toString -}}
-        {{- /* Use modulus to pick an hour between 0 and 23 */}}
-        {{- $customHourStart := index (untilStep 0 23 1) (mod $jobIndex $hourInterval) -}}
-        {{- $hour = (printf "%s/%s" ($customHourStart | toString) ($hourInterval | toString)) -}}
-      {{- end -}}
-
-      {{- $day := "*" -}}
-      {{- /* If minutes, hours or '1d' is set, $day = "*" */}}
-      {{- if or (or (regexMatch "[0-9]+m" .interval) (regexMatch "[0-9]+h" .interval) (eq "1d" .interval)) -}}
-        {{- $day = "*" -}}
-      {{- else -}}
-        {{- $dayInterval := trimSuffix "d" .interval | toString -}}
-        {{- /* Use modulus to pick a day between 0 and 6 */}}
-        {{- $customDayStart := index (untilStep 0 6 1) (mod $jobIndex $dayInterval) -}}
-        {{- $day = (printf "%s/%s" ($customDayStart | toString) ($dayInterval | toString)) -}}
-      {{- end -}}
-
-      {{- $cron := printf "%s %s %s * *" $minute $hour $day -}}
-      {{- $_ := set $jobProperties "cron" $cron -}}
-      {{- $_ := set $generatedJobs $jobName $jobProperties -}}
-      {{- $jobIndex = add1 $jobIndex -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}

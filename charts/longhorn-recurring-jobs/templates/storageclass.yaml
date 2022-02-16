@@ -1,0 +1,28 @@
+{{- if .Values.createStorageClasses -}}
+{{- range $group, $property := .Values.groups -}}
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: longhorn-{{ lower $group }}
+provisioner: driver.longhorn.io
+{{- /* We can't use 'default' because unset evaluates to false */}}
+{{ $allowVolumeExpansion := false }}
+{{- if eq $property.allowVolumeExpansion false -}}
+  {{- $allowVolumeExpansion = false -}}
+{{- else if eq $property.allowVolumeExpansion true -}}
+  {{- $allowVolumeExpansion = true -}}
+{{- else -}}
+  {{- $allowVolumeExpansion = $.Values.defaultAllowVolumeExpansion -}}
+{{- end -}}
+allowVolumeExpansion: {{ $allowVolumeExpansion }}
+parameters:
+  numberOfReplicas: "{{ $property.numberOfReplicas | default $.Values.defaultNumberOfReplicas }}"
+  staleReplicaTimeout: "{{ $property.staleReplicaTimeout | default $.Values.defaultStaleReplicaTimeout }}"
+  recurringJobSelector: |
+    [{
+      "name":"{{ $group }}",
+      "isGroup":true,
+    }]
+---
+{{ end }}
+{{- end -}}

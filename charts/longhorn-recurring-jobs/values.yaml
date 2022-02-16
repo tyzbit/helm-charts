@@ -1,10 +1,24 @@
 namespace: longhorn-system
 
+# Default job concurrency
 defaultConcurrency: 4
 
-# group names must start and end with alnum, and can only have [A-Za-z0-9-_.]
+# Optionally create storageclasses for each group
+# This is disabled by default because the Helm release will fail if
+# An upgrade is run and it tries to remove an in-use StorageClass
+createStorageClasses: false
+
+# Default StorageClass properties
+defaultAllowVolumeExpansion: true
+defaultNumberOfReplicas: "3"
+defaultStaleReplicaTimeout: "2880"
+
+# group names must start and end with alnum, and can only have [A-Za-z0-9\-_.] or [A-Za-z0-9\-] if creating StorageClasses
 groups:
   "Blog":
+    # allowVolumeExpansion: true
+    # numberOfReplicas: "2"
+    # staleReplicaTimeout: "30"
     snapshot:
       - interval: 10m
         retain: 6
@@ -14,48 +28,3 @@ groups:
         retain: 5
       - interval: 6h
         retain: 4
-  "Crypto":
-    snapshot:
-      - interval: 10m
-        retain: 1
-  "Database":
-    snapshot:
-      - interval: 10m
-        retain: 6
-    backup:
-      - interval: 1h
-        retain: 5
-      - interval: 6h
-        retain: 8
-  "Gameserver":
-    snapshot:
-      - interval: 10m
-        retain: 6
-      - interval: 1h
-        retain: 6
-    backup:
-      - interval: 6h
-        retain: 4
-  "Plex":
-    snapshot:
-      - interval: 10m
-        retain: 6
-    backup:
-      - interval: 6h
-        retain: 2
-  "Multimedia":
-    snapshot:
-      - interval: 1h
-        retain: 6
-    backup:
-      - interval: 1d
-        retain: 2
-  "Webapp":
-    snapshot:
-      - interval: 10m
-        retain: 6
-    backup:
-      - interval: 1h
-        retain: 6
-      - interval: 1d
-        retain: 7
