@@ -15,9 +15,11 @@ provisioner: driver.longhorn.io
   {{- $allowVolumeExpansion = $.Values.defaultAllowVolumeExpansion -}}
 {{- end -}}
 allowVolumeExpansion: {{ $allowVolumeExpansion }}
+reclaimPolicy: "{{ $property.relcaimPolicy | default $.Values.defaultReclaimPolicy }}"
 parameters:
   numberOfReplicas: "{{ $property.numberOfReplicas | default $.Values.defaultNumberOfReplicas }}"
   staleReplicaTimeout: "{{ $property.staleReplicaTimeout | default $.Values.defaultStaleReplicaTimeout }}"
+  replicaAutoBalance: "{{ $property.replicaAutoBalance | default $.Values.defaultReplicaAutoBalance }}"
   recurringJobSelector: >-
     [
       {
