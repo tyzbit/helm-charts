@@ -49,7 +49,7 @@
       {{- /* Here we set the minute for cron expressions that have other fields set */}}
       {{- if not (regexMatch "[0-9]+m" .interval) -}}
         {{- /* Use modulus to pick a minute between 0 and 59 */}}
-        {{- $minute = (toString (index (untilStep 0 59 1) (mod $jobIndex 59))) -}}
+        {{- $minute = (toString (index (untilStep 0 59 5) (mod $jobIndex 11))) -}}
       {{- else -}}
         {{- $minuteInterval := trimSuffix "m" .interval | toString -}}
         {{- /* Use modulus to pick a minute between 0 and 59 */}}
@@ -61,7 +61,7 @@
         {{- $hour = "*" -}}
       {{- /* Here we set the hour for cron expressions that have days or more set */}}
       {{- else if not (regexMatch "[0-9]+h" .interval) -}}
-        {{- $hour = toString (index (untilStep 0 23 1) (mod $jobIndex 23)) -}}
+        {{- $hour = toString (index (untilStep 0 23 2) (mod $jobIndex 11)) -}}
       {{- else -}}
         {{- $hourInterval := trimSuffix "h" .interval | toString -}}
         {{- /* Use modulus to pick an hour between 0 and 23 */}}
