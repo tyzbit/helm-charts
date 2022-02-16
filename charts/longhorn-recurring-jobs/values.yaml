@@ -6,6 +6,7 @@ defaultConcurrency: 4
 groups:
   "Database":
     snapshot:
+      # interval can end in 'h', 'm', or 'd'
       - interval: 10m
         retain: 6
     backup:
