@@ -11,7 +11,8 @@ createStorageClasses: false
 # Default StorageClass properties
 defaultAllowVolumeExpansion: true
 defaultReclaimPolicy: Retain
-defaultReplicaAutoBalance: "disabled"
+defaultReplicaAutoBalance: "ignored"
+defaultDataLocality: "disabled"
 defaultNumberOfReplicas: "3"
 defaultStaleReplicaTimeout: "2880"
 
@@ -21,6 +22,7 @@ groups:
     # allowVolumeExpansion: true
     # reclaimPolicy: Delete
     # replicaAutoBalance: "best-effort"
+    # dataLocality: "best-effort"
     # numberOfReplicas: "2"
     # staleReplicaTimeout: "30"
     snapshot:
