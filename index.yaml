@@ -100,4 +100,15 @@ entries:
     urls:
     - https://github.com/tyzbit/helm-charts/releases/download/longhorn-recurring-jobs-0.1.3/longhorn-recurring-jobs-0.1.3.tgz
     version: 0.1.3
-generated: "2022-02-16T17:25:41.465796518Z"
+  neko:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-02-17T17:23:11.999955372Z"
+    description: A Helm chart for Kubernetes
+    digest: 6dcbf374e11380dcc7f9526c9f11b364b14bfe18189c1315c2afa0b108e7c094
+    name: neko
+    type: application
+    urls:
+    - https://github.com/tyzbit/helm-charts/releases/download/neko-0.1.0/neko-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-02-17T17:23:11.999992272Z"
