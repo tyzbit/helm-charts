@@ -103,14 +103,14 @@ entries:
   neko:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-02-17T17:28:06.406025568Z"
-    description: A Helm chart for Kubernetes
-    digest: 1d93372a4f6dcc50c3f3685cc08c77573101e1444fb39bbee8c3fb33aa888a99
+    created: "2022-02-17T17:28:46.027473013Z"
+    description: Share a web browser and react with friends
+    digest: f5131026b602637d8037f45ed4bce93be56af6da8093c28254e87ebb06c880b1
     name: neko
     type: application
     urls:
-    - https://github.com/tyzbit/helm-charts/releases/download/neko-0.1.1/neko-0.1.1.tgz
-    version: 0.1.1
+    - https://github.com/tyzbit/helm-charts/releases/download/neko-0.1.2/neko-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2022-02-17T17:23:11.999955372Z"
@@ -121,4 +121,4 @@ entries:
     urls:
     - https://github.com/tyzbit/helm-charts/releases/download/neko-0.1.0/neko-0.1.0.tgz
     version: 0.1.0
-generated: "2022-02-17T17:28:06.406353672Z"
+generated: "2022-02-17T17:28:46.027506913Z"
