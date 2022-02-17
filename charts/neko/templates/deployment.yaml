@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "neko.fullname" . }}
+  name: {{ include "neko.name" . }}
   labels:
     {{- include "neko.labels" . | nindent 4 }}
 spec:
@@ -36,7 +36,7 @@ spec:
                 name: {{ .Values.existingSecret }}
           {{- else }}
             - secretRef:
-                name: {{ include "neko.fullname" . }}
+                name: {{ include "neko.name" . }}
           {{- end }}
           ports:
             - name: http
