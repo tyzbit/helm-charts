@@ -4,7 +4,8 @@
 
 # Enhancements
 
-- Default groups are now commented out
+**None**
 
 # Bugfixes
 
+- Skew algorithm is updated so hour intervals should be spaced evenly across the day

@@ -54,13 +54,16 @@
         {{- /* Here we set the minute for cron expressions that have other fields set */}}
         {{- if not (regexMatch "[0-9]+m" .interval) -}}
           {{- /* Use modulus to pick a minute between 0 and 59, in $minuteStep minute intervals */}}
-          {{- $minute = (toString (index (untilStep 0 59 $minuteStep) (mod $jobIndex 11))) -}}
+          {{- $minuteOptions := untilStep 0 59 $minuteStep -}}
+          {{- $minute = (toString (index $minuteOptions (mod $jobIndex (len $minuteOptions)))) -}}
         {{- else -}}
           {{- /* The interval was something like "10m", so make $minute equals something like "35/10" */}}
-          {{- $minuteInterval := trimSuffix "m" .interval | toString -}}
-          {{- /* Use modulus to pick a minute between 0 and 59 */}}
-          {{- $customMinuteStart := index (untilStep 0 59 $minuteStep) (mod $jobIndex $minuteInterval) -}}
-          {{- $minute = (printf "%s/%s" ($customMinuteStart | toString) ($minuteInterval | toString)) -}}
+          {{- $minuteInterval := trimSuffix "m" .interval -}}
+          {{- /* Make a list of all the possible options that are $minuteStep apart but less than $minuteInterval */}}
+          {{- $minuteOptions := untilStep 0 (atoi $minuteInterval) $minuteStep -}}
+          {{- /* Use modulus to pick a minute between 0 and $minuteInterval */}}
+          {{- $customMinuteStart := index $minuteOptions (mod $jobIndex (len $minuteOptions)) -}}
+          {{- $minute = (printf "%s/%s" ($customMinuteStart | toString) $minuteInterval) -}}
         {{- end -}}
         
         {{- $hourStep := int $.Values.hourStep -}}
@@ -68,12 +71,15 @@
           {{- $hour = "*" -}}
         {{- /* Here we set the hour for cron expressions that have days or more set */}}
         {{- else if not (regexMatch "[0-9]+h" .interval) -}}
-          {{- $hour = toString (index (untilStep 0 23 $hourStep) (mod $jobIndex 11)) -}}
+          {{- $hourOptions := untilStep 0 23 $hourStep -}}
+          {{- $hour = (toString (index $hourOptions (mod $jobIndex (len $hourOptions)))) -}}
         {{- else -}}
-          {{- $hourInterval := trimSuffix "h" .interval | toString -}}
-          {{- /* Use modulus to pick an hour between 0 and 23 */}}
-          {{- $customHourStart := index (untilStep 0 23 $hourStep) (mod $jobIndex $hourInterval) -}}
-          {{- $hour = (printf "%s/%s" ($customHourStart | toString) ($hourInterval | toString)) -}}
+          {{- $hourInterval := trimSuffix "h" .interval -}}
+          {{- /* Make a list of all the possible options that are $hourStep apart but less than $hourInterval */}}
+          {{- $hourOptions := untilStep 0 (atoi $hourInterval) $hourStep -}}
+          {{- /* Use modulus to pick an hour between 0 and $hourInterval */}}
+          {{- $customHourStart := index $hourOptions (mod $jobIndex (len $hourOptions)) -}}
+          {{- $hour = (printf "%s/%s" ($customHourStart | toString) $hourInterval) -}}
         {{- end -}}
 
         {{- $day := "*" -}}
