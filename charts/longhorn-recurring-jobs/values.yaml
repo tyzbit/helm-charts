@@ -23,34 +23,34 @@ staleReplicaTimeout: "2880"
 
 # Group names must start and end with alphanumeric characters
 # Group names can only have [A-Za-z0-9\-_.] or [A-Za-z0-9\-] if creating StorageClasses
-groups:
-  # Quoting isn't required, but improves readability
-  "ExampleGroup":
-    # One may override these properties for the storage classes for this group
-    # This only takes effect if createStorageClasses is true
-    # _____ Start storage class options _____
-    allowVolumeExpansion: true
-    reclaimPolicy: Delete
-    replicaAutoBalance: "best-effort"
-    dataLocality: "best-effort"
-    numberOfReplicas: "2"
-    staleReplicaTimeout: "30"
-    # ____ End storage class options _____
-    # At least one of either "snapshot" or "backup" is required.
-    snapshot:
-      - interval: 10m
-        retain: 6
-        # One may override the defaultConcurrency on each interval specification
-        concurrency: 10
-    backup: 
-      - interval: 1h
-        retain: 5
-      - interval: 6h
-        retain: 4
-  "ExampleGroupTwo":
-    snapshot:
-      - interval: 1h
-        retain: 6
-    backup: 
-      - interval: 1d
-        retain: 4
+# groups:
+#   # Quoting isn't required, but improves readability
+#   "ExampleGroup":
+#     # One may override these properties for the storage classes for this group
+#     # This only takes effect if createStorageClasses is true
+#     # _____ Start storage class options _____
+#     allowVolumeExpansion: true
+#     reclaimPolicy: Delete
+#     replicaAutoBalance: "best-effort"
+#     dataLocality: "best-effort"
+#     numberOfReplicas: "2"
+#     staleReplicaTimeout: "30"
+#     # ____ End storage class options _____
+#     # At least one of either "snapshot" or "backup" is required.
+#     snapshot:
+#       - interval: 10m
+#         retain: 6
+#         # One may override the defaultConcurrency on each interval specification
+#         concurrency: 10
+#     backup: 
+#       - interval: 1h
+#         retain: 5
+#       - interval: 6h
+#         retain: 4
+#   "ExampleGroupTwo":
+#     snapshot:
+#       - interval: 1h
+#         retain: 6
+#     backup: 
+#       - interval: 1d
+#         retain: 4

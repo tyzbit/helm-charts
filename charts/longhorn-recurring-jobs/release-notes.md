@@ -4,8 +4,7 @@
 
 # Enhancements
 
-**None**
+- Default groups are now commented out
 
 # Bugfixes
 
-- Minor release note fix
