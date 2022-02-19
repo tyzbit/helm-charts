@@ -3,6 +3,11 @@ namespace: longhorn-system
 # Default job concurrency
 defaultConcurrency: 4
 
+# How separated should the minutes and hours be on the generated cron expressions
+# example: if minuteStep: 5, then the cron expression will be like "0/10 * * * *", "5/10 * * * *"
+minuteStep: 5
+hourStep: 2
+
 # Optionally create storageclasses for each group
 # This is disabled by default because the Helm release will fail if
 # An upgrade is run and it tries to remove an in-use StorageClass
@@ -16,21 +21,36 @@ dataLocality: "disabled"
 numberOfReplicas: "3"
 staleReplicaTimeout: "2880"
 
-# group names must start and end with alnum, and can only have [A-Za-z0-9\-_.] or [A-Za-z0-9\-] if creating StorageClasses
+# Group names must start and end with alphanumeric characters
+# Group names can only have [A-Za-z0-9\-_.] or [A-Za-z0-9\-] if creating StorageClasses
 groups:
-  "Blog":
-    # allowVolumeExpansion: true
-    # reclaimPolicy: Delete
-    # replicaAutoBalance: "best-effort"
-    # dataLocality: "best-effort"
-    # numberOfReplicas: "2"
-    # staleReplicaTimeout: "30"
+  # Quoting isn't required, but improves readability
+  "ExampleGroup":
+    # One may override these properties for the storage classes for this group
+    # This only takes effect if createStorageClasses is true
+    # _____ Start storage class options _____
+    allowVolumeExpansion: true
+    reclaimPolicy: Delete
+    replicaAutoBalance: "best-effort"
+    dataLocality: "best-effort"
+    numberOfReplicas: "2"
+    staleReplicaTimeout: "30"
+    # ____ End storage class options _____
+    # At least one of either "snapshot" or "backup" is required.
     snapshot:
       - interval: 10m
         retain: 6
-        # concurrency: 10
+        # One may override the defaultConcurrency on each interval specification
+        concurrency: 10
     backup: 
       - interval: 1h
         retain: 5
       - interval: 6h
+        retain: 4
+  "ExampleGroupTwo":
+    snapshot:
+      - interval: 1h
+        retain: 6
+    backup: 
+      - interval: 1d
         retain: 4
