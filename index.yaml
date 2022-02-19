@@ -2,6 +2,15 @@ apiVersion: v1
 entries:
   longhorn-recurring-jobs:
   - apiVersion: v2
+    created: "2022-02-19T16:50:40.155526929Z"
+    description: Longhorn Recurring Jobs Generator
+    digest: bdccfdb9f14df3da6d4f1b8f1eb0d1b609e7892769ea6f8852b685d27aab9f19
+    name: longhorn-recurring-jobs
+    type: application
+    urls:
+    - https://github.com/tyzbit/helm-charts/releases/download/longhorn-recurring-jobs-0.7.5/longhorn-recurring-jobs-0.7.5.tgz
+    version: 0.7.5
+  - apiVersion: v2
     created: "2022-02-19T16:48:06.112949111Z"
     description: Longhorn Recurring Jobs Generator
     digest: 41cdcc78c73eb73c0266029ec4bd3b6cf619c18c2c5e6a48060a4ef59cceff1e
@@ -158,4 +167,4 @@ entries:
     urls:
     - https://github.com/tyzbit/helm-charts/releases/download/neko-0.1.0/neko-0.1.0.tgz
     version: 0.1.0
-generated: "2022-02-19T16:48:06.113059113Z"
+generated: "2022-02-19T16:50:40.155621028Z"
