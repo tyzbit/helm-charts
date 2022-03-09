@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-- Quote values for the parameters
+- Fix values getting copied over from previously generated groups.

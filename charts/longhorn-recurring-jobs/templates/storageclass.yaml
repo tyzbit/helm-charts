@@ -19,7 +19,7 @@ reclaimPolicy: "{{ $property.reclaimPolicy | default $.Values.reclaimPolicy }}"
 parameters:
 {{- /* Set parameters if they're specified at the top level OR for this specific group */}}
 {{- if or (not (empty $.Values.parameters)) (not (empty $property.parameters)) -}}
-  {{- $parameters := mergeOverwrite ($.Values.parameters | default dict) ($property.parameters | default dict) -}}
+  {{- $parameters := mergeOverwrite dict ($.Values.parameters | default dict) ($property.parameters | default dict) -}}
   {{- range $key, $value := $parameters }}
   {{ $key }}: {{ $value | quote }}
   {{- end -}}
