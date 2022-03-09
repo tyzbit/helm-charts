@@ -21,7 +21,7 @@ parameters:
 {{- if or (not (empty $.Values.parameters)) (not (empty $property.parameters)) -}}
   {{- $parameters := mergeOverwrite ($.Values.parameters | default dict) ($property.parameters | default dict) -}}
   {{- range $key, $value := $parameters }}
-  {{ $key }}: {{ $value }}
+  {{ $key }}: {{ $value | quote }}
   {{- end -}}
 {{ end }}
   recurringJobSelector: >-
