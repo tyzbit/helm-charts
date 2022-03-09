@@ -15,12 +15,15 @@ provisioner: driver.longhorn.io
   {{- $allowVolumeExpansion = $.Values.allowVolumeExpansion -}}
 {{- end -}}
 allowVolumeExpansion: {{ $allowVolumeExpansion }}
-reclaimPolicy: "{{ $property.relcaimPolicy | default $.Values.relcaimPolicy }}"
+reclaimPolicy: "{{ $property.reclaimPolicy | default $.Values.reclaimPolicy }}"
 parameters:
-  numberOfReplicas: "{{ $property.numberOfReplicas | default $.Values.numberOfReplicas }}"
-  staleReplicaTimeout: "{{ $property.staleReplicaTimeout | default $.Values.staleReplicaTimeout }}"
-  replicaAutoBalance: "{{ $property.replicaAutoBalance | default $.Values.replicaAutoBalance }}"
-  dataLocality: "{{ $property.dataLocality | default $.Values.dataLocality }}"
+{{- /* Set parameters if they're specified at the top level OR for this specific group */}}
+{{- if or (not (empty $.Values.parameters)) (not (empty $property.parameters)) -}}
+  {{- $parameters := mergeOverwrite ($.Values.parameters | default dict) ($property.parameters | default dict) -}}
+  {{- range $key, $value := $parameters }}
+  {{ $key }}: {{ $value }}
+  {{- end -}}
+{{ end }}
   recurringJobSelector: >-
     [
       {
