@@ -53,9 +53,13 @@
         {{- $minuteStep := int $.Values.minuteStep -}}
         {{- /* Here we set the minute for cron expressions that have other fields set */}}
         {{- if not (regexMatch "[0-9]+m" .interval) -}}
-          {{- /* Use modulus to pick a minute between 0 and 59, in $minuteStep minute intervals */}}
-          {{- $minuteOptions := untilStep 0 59 $minuteStep -}}
-          {{- $minute = (toString (index $minuteOptions (mod $jobIndex (len $minuteOptions)))) -}}
+          {{- if $.Values.spreadCronStartTimes -}}
+            {{- /* Use modulus to pick a minute between 0 and 59, in $minuteStep minute intervals */}}
+            {{- $minuteOptions := untilStep 0 59 $minuteStep -}}
+            {{- $minute = (toString (index $minuteOptions (mod $jobIndex (len $minuteOptions)))) -}}
+          {{- else -}}
+            {{- $minute = "0" -}}
+          {{- end -}}
         {{- else -}}
           {{- /* The interval was something like "10m", so make $minute equals something like "35/10" */}}
           {{- $minuteInterval := trimSuffix "m" .interval -}}
@@ -71,8 +75,12 @@
           {{- $hour = "*" -}}
         {{- /* Here we set the hour for cron expressions that have days or more set */}}
         {{- else if not (regexMatch "[0-9]+h" .interval) -}}
-          {{- $hourOptions := untilStep 0 23 $hourStep -}}
-          {{- $hour = (toString (index $hourOptions (mod $jobIndex (len $hourOptions)))) -}}
+          {{- if $.Values.spreadCronStartTimes -}}
+            {{- $hourOptions := untilStep 0 23 $hourStep -}}
+            {{- $hour = (toString (index $hourOptions (mod $jobIndex (len $hourOptions)))) -}}
+          {{- else -}}
+            {{- $hour = "0" -}}
+          {{- end -}}
         {{- else -}}
           {{- $hourInterval := trimSuffix "h" .interval -}}
           {{- /* Make a list of all the possible options that are $hourStep apart but less than $hourInterval */}}
@@ -127,7 +135,9 @@ apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
 metadata:
   name: {{ $name }}
-  namespace: {{ $.Values.namespace }}
+  {{- with $.Values.namespaceOverride }}
+  namespace: {{ . }}
+  {{- end }}
 spec:
   cron: {{ $properties.cron | quote }}
   task: {{ $properties.jobType }}
