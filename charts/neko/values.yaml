@@ -18,6 +18,8 @@ env:
 
 existingSecret: ""
 
+persistence: []
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
