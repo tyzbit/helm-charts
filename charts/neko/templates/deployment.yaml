@@ -4,6 +4,10 @@ metadata:
   name: {{ include "neko.name" . }}
   labels:
     {{- include "neko.labels" . | nindent 4 }}
+  {{- with .Values.deploymentAnnotations }}
+  annotations:
+    {{ . }}
+  {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:

@@ -4,7 +4,7 @@
 
 # Enhancements
 
-- Added ability to mount existing claims.
+- Added `deploymentAnnotations`
 
 # Bugfixes
 
