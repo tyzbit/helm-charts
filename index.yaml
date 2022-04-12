@@ -209,6 +209,16 @@ entries:
   neko:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-04-12T01:56:06.028948685Z"
+    description: Share a web browser and react with friends
+    digest: 0821caadc20b5e67cce0dc00fde821ef032e2827e5704ed2f4b4528047b37f28
+    name: neko
+    type: application
+    urls:
+    - https://github.com/tyzbit/helm-charts/releases/download/neko-0.3.0/neko-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-03-20T04:01:00.518306431Z"
     description: Share a web browser and react with friends
     digest: 8bca0eeaf1a8dd29727a1abde853a314f6407b9d75ec9dc37149a4679de7c7cd
@@ -258,4 +268,4 @@ entries:
     urls:
     - https://github.com/tyzbit/helm-charts/releases/download/tplink-0.2.13/tplink-0.2.13.tgz
     version: 0.2.13
-generated: "2022-03-20T04:01:00.518653935Z"
+generated: "2022-04-12T01:56:06.029047286Z"
