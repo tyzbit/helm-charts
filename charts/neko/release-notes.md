@@ -4,8 +4,8 @@
 
 # Enhancements
 
-- Added `deploymentAnnotations`
+**None**
 
 # Bugfixes
 
-**None**
+- Fix deploymentAnnotations
