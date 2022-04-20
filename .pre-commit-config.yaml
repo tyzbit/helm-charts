@@ -1,11 +1,11 @@
 repos:
   - repo: https://github.com/tyzbit/helm-charts
-    rev: main
+    rev: pre-commit-0.1.0
     hooks:
       - id: helm-docs
         args:
           # Make the tool search for charts only under the `example-charts` directory
-          - --chart-search-root=charts/
+          - --chart-search-root=charts
 
           # The `./` makes it relative to the chart-search-root set above
           - --template-files=./_templates.gotmpl
