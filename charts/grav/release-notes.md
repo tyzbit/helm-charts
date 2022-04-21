@@ -4,8 +4,8 @@
 
 # Enhancements
 
-- Add annotations
+**None**
 
 # Bugfixes
 
-**None**
+- Fix pod constraints for filebrowser

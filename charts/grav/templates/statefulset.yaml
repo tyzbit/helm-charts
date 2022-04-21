@@ -62,15 +62,15 @@ spec:
         - name: {{ $pvcName }}
           persistentVolumeClaim:
             claimName: {{ $pvcName }}
-      {{- with .Values.grav.nodeSelector }}
+      {{- with .Values.filebrowser.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.grav.affinity }}
+      {{- with .Values.filebrowser.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.grav.tolerations }}
+      {{- with .Values.filebrowser.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
