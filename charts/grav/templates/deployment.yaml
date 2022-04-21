@@ -80,14 +80,25 @@ spec:
             - name: http
               containerPort: {{ .Values.filebrowser.service.port }}
               protocol: TCP
+          {{- if .Values.filebrowser.probes.enabled }}
+          startupProbe:
+            initialDelaySeconds: {{ .Values.filebrowser.probes.startup.initialDelaySeconds }}
+            failureThreshold: {{ .Values.filebrowser.probes.startup.failureThreshold }}
+            periodSeconds: {{ .Values.filebrowser.probes.startup.periodSeconds }}
+            httpGet:
+              path: /
+              port: http
           livenessProbe:
+            initialDelaySeconds: {{ .Values.filebrowser.probes.liveness.initialDelaySeconds }}
             httpGet:
               path: /
               port: http
           readinessProbe:
+            initialDelaySeconds: {{ .Values.filebrowser.probes.readiness.initialDelaySeconds }}
             httpGet:
               path: /
               port: http
+          {{- end }}
           volumeMounts:
             - name: {{ include "grav.fullname" . }}
               subPath: filebrowser

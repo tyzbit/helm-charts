@@ -64,6 +64,22 @@ filebrowser:
   args: ["-p","8000","-d","/db/database.db"]
   # -- What subdomain filebrowser should be available at
   subdomain: files
+  probes:
+    # -- Enable startup, readiness and liveness probes for filebrowser
+    enabled: true
+    startup:
+      # -- Initial delay for the startup probe
+      initialDelaySeconds: 10
+      # -- Failure threshold
+      failureThreshold: 30
+      # -- How many seconds between probes
+      periodSeconds: 2
+    liveness:
+      # -- Initial delay for the liveness probe
+      initialDelaySeconds: 10
+    readiness:
+      # -- Initial delay for the readiness probe
+      initialDelaySeconds: 10
   service:
     # -- Service port for the filebrowser frontend service
     port: 8000

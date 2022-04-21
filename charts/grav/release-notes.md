@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-- Fix syntax error
+- Fix filebrowser probe
