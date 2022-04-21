@@ -1,0 +1,124 @@
+# Default values for grav.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# -- How many replicas of Grav (and FileBrowser, optionally)
+replicaCount: 1
+
+grav:
+  image:
+    # -- Docker image repo for the grav image
+    repository: tyzbit/grav
+    # -- Kubernetes imagePullPolicy for the grav container
+    pullPolicy: IfNotPresent
+    # -- Docker image tag to deploy for grav, `admin` installs grav with the admin plugin
+    tag: "latest"
+  # -- Custom PHP parameters
+  customPHPini: |-
+    upload_max_filesize = 256M
+    post_max_size = 256M
+  service:
+    # -- Service port for the grav frontend service
+    port: 80
+  # -- Resource limits for the grav container
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+# Filebrowser sidecar
+filebrowser:
+  # -- Enable filebrowser, an app that lets you edit the contents of the data volume via web GUI. Default credentials `admin/admin`
+  enabled: false
+  image:
+    # -- Docker image repo for the filebrowser image
+    repository: filebrowser/filebrowser
+    # -- Kubernetes imagePullPolicy for the filebrowser container
+    pullPolicy: IfNotPresent
+    # -- Docker image tag to deploy for filebrowser
+    tag: v2
+  # -- Arguments for the filebrowser container
+  args: ["-p","8000","-d","/db/database.db"]
+  # -- What subdomain filebrowser should be available at
+  subdomain: edit
+  service:
+    # -- Service port for the filebrowser frontend service
+    port: 8000
+
+persistence:
+  # -- Enable persistence of data (you probably want this)
+  enabled: false
+  # -- Kubernetes StorageClass for the PersistentVolume
+  storageClass: ""
+  # -- Size to provision for the Persistent Volume
+  size: 10Gi
+  # -- Persistent Volume access modes
+  accessModes:
+    - ReadWriteMany
+
+# -- List imagePullSecrets to use when pulling Docker containers
+imagePullSecrets: []
+# -- Override the release name
+nameOverride: ""
+# -- Override the full name
+fullnameOverride: ""
+
+# -- Annotations for the grav container
+podAnnotations: {}
+
+# -- Security context for the grav container
+podSecurityContext: {}
+  # fsGroup: 2000
+
+# -- Security context for all containers in the pod
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  # -- Service type for the grav frontend service
+  type: ClusterIP
+
+ingress:
+  # -- Enable the ingress
+  enabled: false
+  # -- Class name for the ingress
+  className: ""
+  # -- Annotations for the ingress
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    
+    - # -- Hostname for the grav site
+      host: chart-example.local
+      paths:
+          # - Path to the grav site off of the host
+        - path: /
+          # - Path type for matching
+          pathType: ImplementationSpecific
+  # -- Kubernetes TLS secret ( example: `[ secretName: chart-example-tls, hosts: [ chart-example.local ] ]`)
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+# -- Specify a specific node to run grav on
+nodeSelector: {}
+
+# -- Pod tolerations
+tolerations: []
+
+# -- Pod affinity
+affinity: {}

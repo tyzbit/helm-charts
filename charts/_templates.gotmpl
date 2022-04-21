@@ -1,0 +1,10 @@
+{{- define "installing" -}}
+## Installing the Chart
+
+To install the chart with the release name `example`:
+
+```console
+helm repo add tyzbit https://tyzbit.github.io/helm-charts
+helm install example tyzbit/{{ template "chart.name" . }} -f your-values.yaml
+```
+{{- end -}}

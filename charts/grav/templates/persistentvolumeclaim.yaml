@@ -1,0 +1,14 @@
+{{- if .Values.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "grav.fullname" . }}
+spec:
+  resources:
+    requests:
+      storage: {{ .Values.persistence.size }}
+  volumeMode: Filesystem
+  storageClassName: {{ .Values.persistence.storageClass }}
+  accessModes:
+{{ toYaml .Values.persistence.accessModes | indent 4 }}
+{{- end }}

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "grav.fullname" . }}
+  labels:
+    {{- include "grav.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.grav.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  {{- if .Values.filebrowser.enabled }}
+    - port: {{ .Values.filebrowser.service.port }}
+      targetPort: {{ .Values.filebrowser.service.port }}
+      protocol: TCP
+      name: fb-http
+  {{- end }}
+  selector:
+    {{- include "grav.selectorLabels" . | nindent 4 }}

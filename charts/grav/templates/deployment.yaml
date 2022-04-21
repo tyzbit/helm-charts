@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "grav.fullname" . }}
+  labels:
+    {{- include "grav.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "grav.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "grav.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.grav.image.repository }}:{{ .Values.grav.image.tag }}"
+          imagePullPolicy: {{ .Values.grav.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.grav.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: "/var/www/grav/backup"
+              subPath: backup
+              name: {{ include "grav.fullname" . }}
+            - mountPath: "/var/www/grav/logs"
+              subPath: logs
+              name: {{ include "grav.fullname" . }}
+            - mountPath: "/var/www/grav/user"
+              subPath: user
+              name: {{ include "grav.fullname" . }}
+            - mountPath: /etc/php/7.4/fpm/conf.d/99-custom.ini
+              subPath: 99-custom.ini
+              name: custom-ini
+      {{- if .Values.filebrowser.enabled }}
+        - name: {{ .Chart.Name }}-fb
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.filebrowser.image.repository }}:{{ .Values.filebrowser.image.tag }}"
+          imagePullPolicy: {{ .Values.filebrowser.image.pullPolicy }}
+          {{- with .Values.filebrowser.args }}
+          args:
+            {{ . }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.filebrowser.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          volumeMounts:
+            - name: {{ include "grav.fullname" . }}
+              subPath: filebrowser
+              mountPath: /db
+            - mountPath: "/var/www/grav/backup"
+              subPath: backup
+              name: {{ include "grav.fullname" . }}
+            - mountPath: "/var/www/grav/logs"
+              subPath: logs
+              name: {{ include "grav.fullname" . }}
+            - mountPath: "/var/www/grav/user"
+              subPath: user
+              name: {{ include "grav.fullname" . }}
+      {{- end }}
+      volumes:
+        - name: {{ include "grav.fullname" . }}
+          persistentVolumeClaim:
+            claimName: {{ include "grav.fullname" . }}
+        - name: custom-ini
+          configMap:
+            name: {{ include "grav.fullname" . }}-custom-ini
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
