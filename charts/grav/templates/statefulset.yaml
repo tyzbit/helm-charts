@@ -9,6 +9,10 @@ metadata:
   name: {{ include "grav.fullname" . }}-filebrowser
   labels:
     {{- include "grav.labels" . | nindent 4 }}
+  {{ with .Values.statefulSetAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   serviceName: {{ include "grav.fullname" . }}-filebrowser
   selector:

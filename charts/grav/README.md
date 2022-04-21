@@ -2,7 +2,7 @@
 
 Modern, Crazy Fast, Ridiculously Easy and Amazingly Powerful Flat-File CMS powered by PHP, Markdown, Twig, and Symfony
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Installing the Chart
 
@@ -26,6 +26,7 @@ You can also specify `subdomain`.
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Pod affinity |
+| deploymentAnnotations | object | `{}` | Annotations to add to the deployment (grav) |
 | filebrowser.args | list | `["-p","8000","-d","/db/database.db"]` | Arguments for the filebrowser container |
 | filebrowser.enabled | bool | `false` | Enable filebrowser, an app that lets you edit the contents of the data volume via web GUI. Default credentials `admin/admin` |
 | filebrowser.image.pullPolicy | string | `"IfNotPresent"` | Kubernetes imagePullPolicy for the filebrowser container |
@@ -70,6 +71,7 @@ You can also specify `subdomain`.
 | replicaCount | int | `1` | How many replicas of Grav (and FileBrowser, optionally) |
 | securityContext | object | `{}` | Security context for all containers in the pod |
 | service.type | string | `"ClusterIP"` | Service type for the grav frontend service |
+| statefulSetAnnotations | object | `{}` | Annotations to add to the statefulset (filebrowser) |
 | tolerations | list | `[]` | Pod tolerations |
 
 ----------------------------------------------

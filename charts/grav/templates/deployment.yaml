@@ -8,6 +8,10 @@ metadata:
   name: {{ include "grav.fullname" . }}
   labels:
     {{- include "grav.labels" . | nindent 4 }}
+  {{ with .Values.deploymentAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:

@@ -89,6 +89,12 @@ persistence:
   accessModes:
     - ReadWriteMany
 
+# -- Annotations to add to the deployment (grav)
+deploymentAnnotations: {}
+
+# -- Annotations to add to the statefulset (filebrowser)
+statefulSetAnnotations: {}
+
 # -- List imagePullSecrets to use when pulling Docker containers
 imagePullSecrets: []
 # -- Override the release name

@@ -4,8 +4,8 @@
 
 # Enhancements
 
-**None**
+- Add annotations
 
 # Bugfixes
 
-- Remove probes for filebrowser because it's a StatefulSet
+**None**
