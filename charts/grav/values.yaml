@@ -100,7 +100,6 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    
     - # -- Hostname for the grav site
       host: chart-example.local
       paths:

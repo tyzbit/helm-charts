@@ -1,6 +1,6 @@
 # Breaking Changes
 
-Initial Release
+**None**
 
 # Enhancements
 
@@ -8,4 +8,4 @@ Initial Release
 
 # Bugfixes
 
-**None**
+Minor values tweak
