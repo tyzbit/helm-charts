@@ -93,15 +93,15 @@ spec:
         - name: custom-ini
           configMap:
             name: {{ include "grav.fullname" . }}-custom-ini
-      {{- with .Values.nodeSelector }}
+      {{- with .Values.grav.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.affinity }}
+      {{- with .Values.grav.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tolerations }}
+      {{- with .Values.grav.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}

@@ -2,4 +2,4 @@ apiVersion: v2
 name: grav
 description: Modern, Crazy Fast, Ridiculously Easy and Amazingly Powerful Flat-File CMS powered by PHP, Markdown, Twig, and Symfony 
 type: application
-version: 0.5.0
+version: 0.6.0
