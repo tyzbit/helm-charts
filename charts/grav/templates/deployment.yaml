@@ -39,16 +39,19 @@ spec:
             initialDelaySeconds: {{ .Values.grav.probes.startup.initialDelaySeconds }}
             failureThreshold: {{ .Values.grav.probes.startup.failureThreshold }}
             periodSeconds: {{ .Values.grav.probes.startup.periodSeconds }}
+            timeoutSeconds: {{ .Values.grav.probes.startup.timeoutSeconds }}
             httpGet:
               path: /
               port: http
           livenessProbe:
             initialDelaySeconds: {{ .Values.grav.probes.liveness.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.grav.probes.liveness.timeoutSeconds }}
             httpGet:
               path: /
               port: http
           readinessProbe:
             initialDelaySeconds: {{ .Values.grav.probes.readiness.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.grav.probes.readiness.timeoutSeconds }}
             httpGet:
               path: /
               port: http
@@ -85,16 +88,19 @@ spec:
             initialDelaySeconds: {{ .Values.filebrowser.probes.startup.initialDelaySeconds }}
             failureThreshold: {{ .Values.filebrowser.probes.startup.failureThreshold }}
             periodSeconds: {{ .Values.filebrowser.probes.startup.periodSeconds }}
+            timeoutSeconds: {{ .Values.filebrowser.probes.startup.timeoutSeconds }}
             httpGet:
               path: /
               port: http
           livenessProbe:
             initialDelaySeconds: {{ .Values.filebrowser.probes.liveness.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.filebrowser.probes.liveness.timeoutSeconds }}
             httpGet:
               path: /
               port: http
           readinessProbe:
             initialDelaySeconds: {{ .Values.filebrowser.probes.readiness.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.filebrowser.probes.readiness.timeoutSeconds }}
             httpGet:
               path: /
               port: http

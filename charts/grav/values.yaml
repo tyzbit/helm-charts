@@ -27,12 +27,18 @@ grav:
       failureThreshold: 30
       # -- How many seconds between probes
       periodSeconds: 2
+      # -- Probe timeout
+      timeoutSeconds: 2
     liveness:
       # -- Initial delay for the liveness probe
       initialDelaySeconds: 10
+      # -- Probe timeout
+      timeoutSeconds: 2
     readiness:
       # -- Initial delay for the readiness probe
       initialDelaySeconds: 10
+      # -- Probe timeout
+      timeoutSeconds: 2
   service:
     # -- Service port for the grav frontend service
     port: 80
@@ -74,12 +80,18 @@ filebrowser:
       failureThreshold: 30
       # -- How many seconds between probes
       periodSeconds: 2
+      # -- Probe timeout
+      timeoutSeconds: 2
     liveness:
       # -- Initial delay for the liveness probe
       initialDelaySeconds: 10
+      # -- Probe timeout
+      timeoutSeconds: 2
     readiness:
       # -- Initial delay for the readiness probe
       initialDelaySeconds: 10
+      # -- Probe timeout
+      timeoutSeconds: 2
   service:
     # -- Service port for the filebrowser frontend service
     port: 8000
