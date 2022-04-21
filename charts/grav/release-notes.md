@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-- Fix filebrowser SelectorLabels
+- Fix service
