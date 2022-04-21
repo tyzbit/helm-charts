@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-- Fix pod constraints for filebrowser
+- Comment text
