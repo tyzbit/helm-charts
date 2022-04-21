@@ -2,14 +2,15 @@
 {{- if ne .Values.persistence.existingClaimName "" }}
   {{ $pvcName = .Values.persistence.existingClaimName }}
 {{- end }}
+{{- if .Values.filebrowser.enabled }}
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: {{ include "grav.fullname" . }}
+  name: {{ include "grav.fullname" . }}-filebrowser
   labels:
     {{- include "grav.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  serviceName: {{ include "grav.fullname" . }}-filebrowser
   selector:
     matchLabels:
       {{- include "grav.selectorLabels" . | nindent 6 }}
@@ -29,40 +30,43 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ .Chart.Name }}-filebrowser
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.grav.image.repository }}:{{ .Values.grav.image.tag }}"
-          imagePullPolicy: {{ .Values.grav.image.pullPolicy }}
+          image: "{{ .Values.filebrowser.image.repository }}:{{ .Values.filebrowser.image.tag }}"
+          imagePullPolicy: {{ .Values.filebrowser.image.pullPolicy }}
+          args:
+            {{- toYaml .Values.filebrowser.args | nindent 12 }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.filebrowser.service.port }}
               protocol: TCP
-          {{- if .Values.grav.probes.enabled }}
+          {{- if .Values.filebrowser.probes.enabled }}
           startupProbe:
-            initialDelaySeconds: {{ .Values.grav.probes.startup.initialDelaySeconds }}
-            failureThreshold: {{ .Values.grav.probes.startup.failureThreshold }}
-            periodSeconds: {{ .Values.grav.probes.startup.periodSeconds }}
-            timeoutSeconds: {{ .Values.grav.probes.startup.timeoutSeconds }}
+            initialDelaySeconds: {{ .Values.filebrowser.probes.startup.initialDelaySeconds }}
+            failureThreshold: {{ .Values.filebrowser.probes.startup.failureThreshold }}
+            periodSeconds: {{ .Values.filebrowser.probes.startup.periodSeconds }}
+            timeoutSeconds: {{ .Values.filebrowser.probes.startup.timeoutSeconds }}
             httpGet:
               path: /
               port: http
           livenessProbe:
-            initialDelaySeconds: {{ .Values.grav.probes.liveness.initialDelaySeconds }}
-            timeoutSeconds: {{ .Values.grav.probes.liveness.timeoutSeconds }}
+            initialDelaySeconds: {{ .Values.filebrowser.probes.liveness.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.filebrowser.probes.liveness.timeoutSeconds }}
             httpGet:
               path: /
               port: http
           readinessProbe:
-            initialDelaySeconds: {{ .Values.grav.probes.readiness.initialDelaySeconds }}
-            timeoutSeconds: {{ .Values.grav.probes.readiness.timeoutSeconds }}
+            initialDelaySeconds: {{ .Values.filebrowser.probes.readiness.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.filebrowser.probes.readiness.timeoutSeconds }}
             httpGet:
               path: /
               port: http
           {{- end }}
-          resources:
-            {{- toYaml .Values.grav.resources | nindent 12 }}
           volumeMounts:
+            - name: {{ $pvcName }}
+              subPath: filebrowser
+              mountPath: /db
             - mountPath: "/var/www/grav/backup"
               subPath: backup
               name: {{ $pvcName }}
@@ -72,16 +76,10 @@ spec:
             - mountPath: "/var/www/grav/user"
               subPath: user
               name: {{ $pvcName }}
-            - mountPath: /etc/php/7.4/fpm/conf.d/99-custom.ini
-              subPath: 99-custom.ini
-              name: custom-ini
       volumes:
         - name: {{ $pvcName }}
           persistentVolumeClaim:
             claimName: {{ $pvcName }}
-        - name: custom-ini
-          configMap:
-            name: {{ $pvcName }}-custom-ini
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -94,3 +92,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+{{- end }}

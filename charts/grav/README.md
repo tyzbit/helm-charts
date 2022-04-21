@@ -2,7 +2,7 @@
 
 Modern, Crazy Fast, Ridiculously Easy and Amazingly Powerful Flat-File CMS powered by PHP, Markdown, Twig, and Symfony
 
-![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Installing the Chart
 
@@ -17,18 +17,35 @@ helm install example tyzbit/grav -f your-values.yaml
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Pod affinity |
 | filebrowser.args | list | `["-p","8000","-d","/db/database.db"]` | Arguments for the filebrowser container |
-| filebrowser.enabled | bool | `true` | Enable filebrowser, an app that lets you edit the contents of the data volume via web GUI. Default credentials `admin/admin` |
+| filebrowser.enabled | bool | `false` | Enable filebrowser, an app that lets you edit the contents of the data volume via web GUI. Default credentials `admin/admin` |
 | filebrowser.image.pullPolicy | string | `"IfNotPresent"` | Kubernetes imagePullPolicy for the filebrowser container |
 | filebrowser.image.repository | string | `"filebrowser/filebrowser"` | Docker image repo for the filebrowser image |
 | filebrowser.image.tag | string | `"v2"` | Docker image tag to deploy for filebrowser |
+| filebrowser.probes.enabled | bool | `true` | Enable startup, readiness and liveness probes for filebrowser |
+| filebrowser.probes.liveness.initialDelaySeconds | int | `10` | Initial delay for the liveness probe |
+| filebrowser.probes.liveness.timeoutSeconds | int | `2` | Probe timeout |
+| filebrowser.probes.readiness.initialDelaySeconds | int | `10` | Initial delay for the readiness probe |
+| filebrowser.probes.readiness.timeoutSeconds | int | `2` | Probe timeout |
+| filebrowser.probes.startup.failureThreshold | int | `30` | Failure threshold |
+| filebrowser.probes.startup.initialDelaySeconds | int | `10` | Initial delay for the startup probe |
+| filebrowser.probes.startup.periodSeconds | int | `2` | How many seconds between probes |
+| filebrowser.probes.startup.timeoutSeconds | int | `2` | Probe timeout |
 | filebrowser.service.port | int | `8000` | Service port for the filebrowser frontend service |
-| filebrowser.subdomain | string | `"edit"` | What subdomain filebrowser should be available at |
+| filebrowser.subdomain | string | `"files"` | What subdomain filebrowser should be available at |
 | fullnameOverride | string | `""` | Override the full name |
 | grav.customPHPini | string | `"upload_max_filesize = 256M\npost_max_size = 256M"` | Custom PHP parameters |
 | grav.image.pullPolicy | string | `"IfNotPresent"` | Kubernetes imagePullPolicy for the grav container |
 | grav.image.repository | string | `"tyzbit/grav"` | Docker image repo for the grav image |
 | grav.image.tag | string | `"latest"` | Docker image tag to deploy for grav, `admin` installs grav with the admin plugin |
 | grav.probes.enabled | bool | `true` | Enable startup, readiness and liveness probes for grav |
+| grav.probes.liveness.initialDelaySeconds | int | `10` | Initial delay for the liveness probe |
+| grav.probes.liveness.timeoutSeconds | int | `2` | Probe timeout |
+| grav.probes.readiness.initialDelaySeconds | int | `10` | Initial delay for the readiness probe |
+| grav.probes.readiness.timeoutSeconds | int | `2` | Probe timeout |
+| grav.probes.startup.failureThreshold | int | `30` | Failure threshold |
+| grav.probes.startup.initialDelaySeconds | int | `10` | Initial delay for the startup probe |
+| grav.probes.startup.periodSeconds | int | `2` | How many seconds between probes |
+| grav.probes.startup.timeoutSeconds | int | `2` | Probe timeout |
 | grav.resources | object | `{}` | Resource limits for the grav container |
 | grav.service.port | int | `80` | Service port for the grav frontend service |
 | imagePullSecrets | list | `[]` | List imagePullSecrets to use when pulling Docker containers |
@@ -43,6 +60,7 @@ helm install example tyzbit/grav -f your-values.yaml
 | nodeSelector | object | `{}` | Specify a specific node to run grav on |
 | persistence.accessModes | list | `["ReadWriteMany"]` | Persistent Volume access modes |
 | persistence.enabled | bool | `false` | Enable persistence of data (you probably want this) |
+| persistence.existingClaimName | string | `""` | Use an existing PersistentVolumeClaim |
 | persistence.size | string | `"10Gi"` | Size to provision for the Persistent Volume |
 | persistence.storageClass | string | `""` | Kubernetes StorageClass for the PersistentVolume |
 | podAnnotations | object | `{}` | Annotations for the grav container |

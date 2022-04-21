@@ -4,8 +4,9 @@
 
 # Enhancements
 
-**None**
+- Set filebrowser up as a StatefulSet
+- Allow specifying an existingClaimName for persistence
 
 # Bugfixes
 
-- Fix filebrowser probe
+**None**

@@ -99,6 +99,8 @@ filebrowser:
 persistence:
   # -- Enable persistence of data (you probably want this)
   enabled: false
+  # -- Use an existing PersistentVolumeClaim
+  existingClaimName: ""
   # -- Kubernetes StorageClass for the PersistentVolume
   storageClass: ""
   # -- Size to provision for the Persistent Volume
