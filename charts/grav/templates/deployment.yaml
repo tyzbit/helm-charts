@@ -35,10 +35,12 @@ spec:
               containerPort: 80
               protocol: TCP
           livenessProbe:
+            initialDelaySeconds: 10
             httpGet:
               path: /
               port: http
           readinessProbe:
+            initialDelaySeconds: 10
             httpGet:
               path: /
               port: http
@@ -72,10 +74,12 @@ spec:
               containerPort: {{ .Values.filebrowser.service.port }}
               protocol: TCP
           livenessProbe:
+            initialDelaySeconds: 10
             httpGet:
               path: /
               port: http
           readinessProbe:
+            initialDelaySeconds: 10
             httpGet:
               path: /
               port: http

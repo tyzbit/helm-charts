@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-- Fix ingress
+- Add initialDelaySeconds
