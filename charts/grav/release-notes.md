@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-- Add initialDelaySeconds
+- fix filebrowser args

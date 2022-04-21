@@ -4,4 +4,4 @@ metadata:
   name: {{ include "grav.fullname" . }}-custom-ini
 data:
   99-custom.ini: |-
-{{ .Values.grav.customPHPini | indent 4 }}
+{{- .Values.grav.customPHPini | nindent 4 }}

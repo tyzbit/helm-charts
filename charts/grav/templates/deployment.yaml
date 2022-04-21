@@ -65,10 +65,8 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.filebrowser.image.repository }}:{{ .Values.filebrowser.image.tag }}"
           imagePullPolicy: {{ .Values.filebrowser.image.pullPolicy }}
-          {{- with .Values.filebrowser.args }}
           args:
-            {{ . }}
-          {{- end }}
+            {{- toYaml .Values.filebrowser.args | nindent 12 }}
           ports:
             - name: http
               containerPort: {{ .Values.filebrowser.service.port }}

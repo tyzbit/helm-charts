@@ -36,7 +36,7 @@ grav:
 # Filebrowser sidecar
 filebrowser:
   # -- Enable filebrowser, an app that lets you edit the contents of the data volume via web GUI. Default credentials `admin/admin`
-  enabled: false
+  enabled: true
   image:
     # -- Docker image repo for the filebrowser image
     repository: filebrowser/filebrowser
