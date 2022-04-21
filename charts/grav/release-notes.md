@@ -4,8 +4,8 @@
 
 # Enhancements
 
-- Allow specifying any envs
+**None**
 
 # Bugfixes
 
-**None**
+- Remove probes for filebrowser because it's a StatefulSet

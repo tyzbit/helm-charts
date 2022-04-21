@@ -31,15 +31,6 @@ You can also specify `subdomain`.
 | filebrowser.image.pullPolicy | string | `"IfNotPresent"` | Kubernetes imagePullPolicy for the filebrowser container |
 | filebrowser.image.repository | string | `"filebrowser/filebrowser"` | Docker image repo for the filebrowser image |
 | filebrowser.image.tag | string | `"v2"` | Docker image tag to deploy for filebrowser |
-| filebrowser.probes.enabled | bool | `true` | Enable startup, readiness and liveness probes for filebrowser |
-| filebrowser.probes.liveness.initialDelaySeconds | int | `10` | Initial delay for the liveness probe |
-| filebrowser.probes.liveness.timeoutSeconds | int | `2` | Probe timeout |
-| filebrowser.probes.readiness.initialDelaySeconds | int | `10` | Initial delay for the readiness probe |
-| filebrowser.probes.readiness.timeoutSeconds | int | `2` | Probe timeout |
-| filebrowser.probes.startup.failureThreshold | int | `30` | Failure threshold |
-| filebrowser.probes.startup.initialDelaySeconds | int | `10` | Initial delay for the startup probe |
-| filebrowser.probes.startup.periodSeconds | int | `2` | How many seconds between probes |
-| filebrowser.probes.startup.timeoutSeconds | int | `2` | Probe timeout |
 | filebrowser.service.port | int | `8000` | Service port for the filebrowser frontend service |
 | filebrowser.subdomain | string | `"files"` | What subdomain filebrowser should be available at |
 | fullnameOverride | string | `""` | Override the full name |
