@@ -1,8 +1,8 @@
-# Grav
+# grav
 
 Modern, Crazy Fast, Ridiculously Easy and Amazingly Powerful Flat-File CMS powered by PHP, Markdown, Twig, and Symfony
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Installing the Chart
 
@@ -10,14 +10,14 @@ To install the chart with the release name `example`:
 
 ```console
 helm repo add tyzbit https://tyzbit.github.io/helm-charts
-helm install example tyzbit/Grav -f your-values.yaml
+helm install example tyzbit/grav -f your-values.yaml
 ```
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Pod affinity |
 | filebrowser.args | list | `["-p","8000","-d","/db/database.db"]` | Arguments for the filebrowser container |
-| filebrowser.enabled | bool | `false` | Enable filebrowser, an app that lets you edit the contents of the data volume via web GUI. Default credentials `admin/admin` |
+| filebrowser.enabled | bool | `true` | Enable filebrowser, an app that lets you edit the contents of the data volume via web GUI. Default credentials `admin/admin` |
 | filebrowser.image.pullPolicy | string | `"IfNotPresent"` | Kubernetes imagePullPolicy for the filebrowser container |
 | filebrowser.image.repository | string | `"filebrowser/filebrowser"` | Docker image repo for the filebrowser image |
 | filebrowser.image.tag | string | `"v2"` | Docker image tag to deploy for filebrowser |
@@ -28,12 +28,13 @@ helm install example tyzbit/Grav -f your-values.yaml
 | grav.image.pullPolicy | string | `"IfNotPresent"` | Kubernetes imagePullPolicy for the grav container |
 | grav.image.repository | string | `"tyzbit/grav"` | Docker image repo for the grav image |
 | grav.image.tag | string | `"latest"` | Docker image tag to deploy for grav, `admin` installs grav with the admin plugin |
+| grav.probes.enabled | bool | `true` | Enable startup, readiness and liveness probes for grav |
 | grav.resources | object | `{}` | Resource limits for the grav container |
 | grav.service.port | int | `80` | Service port for the grav frontend service |
 | imagePullSecrets | list | `[]` | List imagePullSecrets to use when pulling Docker containers |
 | ingress.annotations | object | `{}` | Annotations for the ingress |
 | ingress.className | string | `""` | Class name for the ingress |
-| ingress.enabled | bool | `false` | Enable the ingress |
+| ingress.enabled | bool | `true` | Enable the ingress |
 | ingress.hosts[0].host | string | `"chart-example.local"` | Hostname for the grav site |
 | ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |

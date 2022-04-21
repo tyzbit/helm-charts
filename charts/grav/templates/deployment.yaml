@@ -34,16 +34,25 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
+          {{- if .Values.grav.probes.enabled }}
+          startupProbe:
+            initialDelaySeconds: {{- if .Values.grav.probes.startup.initialDelaySeconds }}
+            failureThreshold: {{- if .Values.grav.probes.startup.failureThreshold }}
+            periodSeconds: {{- if .Values.grav.probes.startup.periodSeconds }}
+            httpGet:
+              path: /
+              port: http
           livenessProbe:
-            initialDelaySeconds: 10
+            initialDelaySeconds: {{- if .Values.grav.probes.liveness.initialDelaySeconds }}
             httpGet:
               path: /
               port: http
           readinessProbe:
-            initialDelaySeconds: 10
+            initialDelaySeconds: {{- if .Values.grav.probes.readiness.initialDelaySeconds }}
             httpGet:
               path: /
               port: http
+          {{- end }}
           resources:
             {{- toYaml .Values.grav.resources | nindent 12 }}
           volumeMounts:
@@ -72,12 +81,10 @@ spec:
               containerPort: {{ .Values.filebrowser.service.port }}
               protocol: TCP
           livenessProbe:
-            initialDelaySeconds: 10
             httpGet:
               path: /
               port: http
           readinessProbe:
-            initialDelaySeconds: 10
             httpGet:
               path: /
               port: http

@@ -4,8 +4,8 @@
 
 # Enhancements
 
-**None**
+- Specify probe values
 
 # Bugfixes
 
-- Fix ingress host issue
+**None**

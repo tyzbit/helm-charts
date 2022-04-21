@@ -17,6 +17,22 @@ grav:
   customPHPini: |-
     upload_max_filesize = 256M
     post_max_size = 256M
+  probes:
+    # -- Enable startup, readiness and liveness probes for grav
+    enabled: true
+    startup:
+      # -- Initial delay for the startup probe
+      initialDelaySeconds: 10
+      # -- Failure threshold
+      failureThreshold: 30
+      # -- How many seconds between probes
+      periodSeconds: 2
+    liveness:
+      # -- Initial delay for the liveness probe
+      initialDelaySeconds: 10
+    readiness:
+      # -- Initial delay for the readiness probe
+      initialDelaySeconds: 10
   service:
     # -- Service port for the grav frontend service
     port: 80
