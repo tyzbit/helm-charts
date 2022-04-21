@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-- Comment text
+- Documentation update

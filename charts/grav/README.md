@@ -2,7 +2,7 @@
 
 Modern, Crazy Fast, Ridiculously Easy and Amazingly Powerful Flat-File CMS powered by PHP, Markdown, Twig, and Symfony
 
-![Version: 0.6.1](https://img.shields.io/badge/Version-0.6.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.6.3](https://img.shields.io/badge/Version-0.6.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Installing the Chart
 
@@ -61,8 +61,8 @@ You can also specify `subdomain`.
 | ingress.className | string | `""` | Class name for the ingress |
 | ingress.enabled | bool | `true` | Enable the ingress |
 | ingress.hosts[0].host | string | `"chart-example.local"` | Hostname for the grav site |
-| ingress.hosts[0].paths[0].path | string | `"/"` |  |
-| ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
+| ingress.hosts[0].paths[0].path | string | `"/"` | Path to the grav site off of the host |
+| ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` | Path type for matching |
 | ingress.tls | list | `[]` | Kubernetes TLS secret ( example: `[ secretName: chart-example-tls, hosts: [ chart-example.local ] ]`) |
 | nameOverride | string | `""` | Override the release name |
 | persistence.accessModes | list | `["ReadWriteMany"]` | Persistent Volume access modes |
@@ -72,7 +72,7 @@ You can also specify `subdomain`.
 | persistence.storageClass | string | `""` | Kubernetes StorageClass for the PersistentVolume |
 | podAnnotations | object | `{}` | Annotations for the grav container |
 | podSecurityContext | object | `{}` | Security context for the grav container |
-| replicaCount | int | `1` | How many replicas of Grav (and FileBrowser, optionally) |
+| replicaCount | int | `1` | How many replicas of Grav |
 | securityContext | object | `{}` | Security context for all containers in the pod |
 | service.type | string | `"ClusterIP"` | Service type for the grav frontend service |
 | statefulSetAnnotations | object | `{}` | Annotations to add to the statefulset (filebrowser) |

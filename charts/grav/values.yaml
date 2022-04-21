@@ -168,9 +168,9 @@ ingress:
     - # -- Hostname for the grav site
       host: chart-example.local
       paths:
-          # - Path to the grav site off of the host
-        - path: /
-          # - Path type for matching
+        - # -- Path to the grav site off of the host
+          path: /
+          # -- Path type for matching
           pathType: ImplementationSpecific
 
   # -- Kubernetes TLS secret ( example: `[ secretName: chart-example-tls, hosts: [ chart-example.local ] ]`)
