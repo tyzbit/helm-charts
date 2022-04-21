@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-- Disable filebrowser by default, change default subdomain
+- Fix syntax error

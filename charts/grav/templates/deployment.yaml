@@ -36,19 +36,19 @@ spec:
               protocol: TCP
           {{- if .Values.grav.probes.enabled }}
           startupProbe:
-            initialDelaySeconds: {{- if .Values.grav.probes.startup.initialDelaySeconds }}
-            failureThreshold: {{- if .Values.grav.probes.startup.failureThreshold }}
-            periodSeconds: {{- if .Values.grav.probes.startup.periodSeconds }}
+            initialDelaySeconds: {{- .Values.grav.probes.startup.initialDelaySeconds }}
+            failureThreshold: {{- .Values.grav.probes.startup.failureThreshold }}
+            periodSeconds: {{- .Values.grav.probes.startup.periodSeconds }}
             httpGet:
               path: /
               port: http
           livenessProbe:
-            initialDelaySeconds: {{- if .Values.grav.probes.liveness.initialDelaySeconds }}
+            initialDelaySeconds: {{- .Values.grav.probes.liveness.initialDelaySeconds }}
             httpGet:
               path: /
               port: http
           readinessProbe:
-            initialDelaySeconds: {{- if .Values.grav.probes.readiness.initialDelaySeconds }}
+            initialDelaySeconds: {{- .Values.grav.probes.readiness.initialDelaySeconds }}
             httpGet:
               path: /
               port: http
