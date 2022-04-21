@@ -4,8 +4,8 @@
 
 # Enhancements
 
-**None**
+- Add multisite capability
 
 # Bugfixes
 
-- Fix ini and filebrowser volumeMounts
+**None**
