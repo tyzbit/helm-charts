@@ -1,41 +1,45 @@
-# Default values for inspector.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
-namespace: default
+# -- StorageClass name for the inspector configs
 storageClassName: default
 
 image:
+  # -- Image repository for Inspector
   repository: tyzbit/inspector
+  # -- Image pull policy
   pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
+  # -- Image tag
   tag: "latest"
 
+# -- Docker image pull secrets
 imagePullSecrets: 
-  - name: docker-hub
+  # - name: docker-hub
 
+# -- Additional mounts (`[ name: name, mountPath: /path ]`)
 additionalMounts: {}
   # - name: inspector-configs
   #   mountPath: /inspector/
 
+# -- Additional volumes (`[ name: name, persistentVolumeClaim: { claimName: /path } ]`)
 additionalVolumes: {}
 # - name: inspector-configs
 #   persistentVolumeClaim:
 #     claimName: inspector-configs
 
-# podAnnotations:
+# -- Annotations for the pod
+podAnnotations:
 #   linkerd.io/inject: enabled
 
-resources: 
+# -- Resources for the container
+resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  limits:
-    #cpu: 100m
-    memory: 128Mi
-  requests:
-    #cpu: 100m
-    memory: 128Mi
+  # limits:
+    # cpu: 100m
+    # memory: 128Mi
+  # requests:
+    # cpu: 100m
+    # memory: 128Mi
 
+# -- Tolerations
 tolerations: {}

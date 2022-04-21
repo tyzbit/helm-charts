@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: {{ include "inspector.fullname" . }}
-  namespace: {{ .Values.namespace }}
   labels:
     {{- include "inspector.labels" . | nindent 4 }}
 spec:
