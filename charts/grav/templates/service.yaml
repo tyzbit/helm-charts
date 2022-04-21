@@ -24,7 +24,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "grav.fullname" . }}
+  name: {{ include "grav.fullname" . }}-filebrowser
   labels:
     {{- include "grav.labels" . | nindent 4 }}
 spec:
