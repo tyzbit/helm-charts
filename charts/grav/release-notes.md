@@ -4,8 +4,8 @@
 
 # Enhancements
 
-- Specify probe values
+**None**
 
 # Bugfixes
 
-**None**
+- Disable filebrowser by default, change default subdomain

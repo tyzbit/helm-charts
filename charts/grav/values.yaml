@@ -52,7 +52,7 @@ grav:
 # Filebrowser sidecar
 filebrowser:
   # -- Enable filebrowser, an app that lets you edit the contents of the data volume via web GUI. Default credentials `admin/admin`
-  enabled: true
+  enabled: false
   image:
     # -- Docker image repo for the filebrowser image
     repository: filebrowser/filebrowser
@@ -63,7 +63,7 @@ filebrowser:
   # -- Arguments for the filebrowser container
   args: ["-p","8000","-d","/db/database.db"]
   # -- What subdomain filebrowser should be available at
-  subdomain: edit
+  subdomain: files
   service:
     # -- Service port for the filebrowser frontend service
     port: 8000
