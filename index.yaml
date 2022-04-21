@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   grav:
   - apiVersion: v2
+    created: "2022-04-21T00:33:25.777873908Z"
+    description: Modern, Crazy Fast, Ridiculously Easy and Amazingly Powerful Flat-File
+      CMS powered by PHP, Markdown, Twig, and Symfony
+    digest: a768240df6dc08ba2bb4df68632b6477d888d209e2806f926ad4ec0a94a4832d
+    name: grav
+    type: application
+    urls:
+    - https://github.com/tyzbit/helm-charts/releases/download/grav-0.1.1/grav-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     created: "2022-04-21T00:25:48.514639133Z"
     description: Modern, Crazy Fast, Ridiculously Easy and Amazingly Powerful Flat-File
       CMS powered by PHP, Markdown, Twig, and Symfony
@@ -289,4 +299,4 @@ entries:
     urls:
     - https://github.com/tyzbit/helm-charts/releases/download/tplink-0.2.13/tplink-0.2.13.tgz
     version: 0.2.13
-generated: "2022-04-21T00:25:48.514846734Z"
+generated: "2022-04-21T00:33:25.778083508Z"
