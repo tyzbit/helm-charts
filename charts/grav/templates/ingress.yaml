@@ -57,9 +57,8 @@ spec:
               servicePort: {{ $svcPort }}
               {{- end }}
           {{- end }}
-    {{- end }}
-    {{- if .Values.filebrowser.enabled }}
-    - host: {{ cat .Values.filebrowser.subdomain .host | quote }}
+    {{- if $.Values.filebrowser.enabled }}
+    - host: {{ printf "%s.%s" $.Values.filebrowser.subdomain .host | quote }}
       http:
         paths:
           - path: /
@@ -69,10 +68,11 @@ spec:
               service:
                 name: {{ $fullName }}
                 port:
-                  number: {{ .Values.filebrowser.service.port }}
+                  number: {{ $.Values.filebrowser.service.port }}
               {{- else }}
               serviceName: {{ $fullName }}
-              servicePort: {{ .Values.filebrowser.service.port }}
+              servicePort: {{ $.Values.filebrowser.service.port }}
               {{- end }}
+    {{- end }}
     {{- end }}
 {{- end }}

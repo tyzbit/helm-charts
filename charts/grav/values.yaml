@@ -92,7 +92,7 @@ service:
 
 ingress:
   # -- Enable the ingress
-  enabled: false
+  enabled: true
   # -- Class name for the ingress
   className: ""
   # -- Annotations for the ingress

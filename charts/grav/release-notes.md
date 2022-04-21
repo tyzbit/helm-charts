@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-- fix filebrowser args
+- Fix ingress host issue
