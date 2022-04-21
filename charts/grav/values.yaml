@@ -17,8 +17,8 @@ grav:
   customPHPini: |-
     upload_max_filesize = 256M
     post_max_size = 256M
-  # -- Specify a multisite type (`subdirectory` or `subdomain`)
-  multisite: ""
+  # -- Specify environment variables (in key: "value" notation)
+  config: {}
   probes:
     # -- Enable startup, readiness and liveness probes for grav
     enabled: true

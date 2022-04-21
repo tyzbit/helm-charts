@@ -2,7 +2,7 @@
 
 Modern, Crazy Fast, Ridiculously Easy and Amazingly Powerful Flat-File CMS powered by PHP, Markdown, Twig, and Symfony
 
-![Version: 0.3.4](https://img.shields.io/badge/Version-0.3.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Installing the Chart
 
@@ -12,6 +12,16 @@ To install the chart with the release name `example`:
 helm repo add tyzbit https://tyzbit.github.io/helm-charts
 helm install example tyzbit/grav -f your-values.yaml
 ```
+
+### Multisite
+Enable multisite:
+```yaml
+grav:
+  config:
+    GRAV_MULTISITE: subdirectory
+```
+
+You can also specify `subdomain`.
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -33,11 +43,11 @@ helm install example tyzbit/grav -f your-values.yaml
 | filebrowser.service.port | int | `8000` | Service port for the filebrowser frontend service |
 | filebrowser.subdomain | string | `"files"` | What subdomain filebrowser should be available at |
 | fullnameOverride | string | `""` | Override the full name |
+| grav.config | object | `{}` | Specify environment variables (in key: "value" notation) |
 | grav.customPHPini | string | `"upload_max_filesize = 256M\npost_max_size = 256M"` | Custom PHP parameters |
 | grav.image.pullPolicy | string | `"IfNotPresent"` | Kubernetes imagePullPolicy for the grav container |
 | grav.image.repository | string | `"tyzbit/grav"` | Docker image repo for the grav image |
 | grav.image.tag | string | `"latest"` | Docker image tag to deploy for grav, `admin` installs grav with the admin plugin |
-| grav.multisite | string | `""` | Specify a multisite type (`subdirectory` or `subdomain`) |
 | grav.probes.enabled | bool | `true` | Enable startup, readiness and liveness probes for grav |
 | grav.probes.liveness.initialDelaySeconds | int | `10` | Initial delay for the liveness probe |
 | grav.probes.liveness.timeoutSeconds | int | `2` | Probe timeout |

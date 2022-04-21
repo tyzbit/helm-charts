@@ -5,6 +5,16 @@
 
 {{ template "installing" . }}
 
+### Multisite
+Enable multisite:
+```yaml
+grav:
+  config:
+    GRAV_MULTISITE: subdirectory
+```
+
+You can also specify `subdomain`.
+
 {{ template "chart.valuesTable" . }}
 
 {{ template "helm-docs.versionFooter" . }}

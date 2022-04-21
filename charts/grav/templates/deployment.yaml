@@ -34,10 +34,12 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.grav.image.repository }}:{{ .Values.grav.image.tag }}"
           imagePullPolicy: {{ .Values.grav.image.pullPolicy }}
-          env:
-          {{- if ne .Values.grav.multisite "" }}
-            - name: GRAV_MULTISITE
-              value: {{ .Values.grav.multisite }}
+          {{- if .Values.grav.config }}
+          env: 
+          {{- range $env, $value := .Values.grav.config }}
+            - name: {{ $env }}
+              value: {{ $value | quote }}
+          {{- end }}
           {{- end }}
           ports:
             - name: http

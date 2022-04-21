@@ -4,7 +4,7 @@
 
 # Enhancements
 
-- Add multisite capability
+- Allow specifying any envs
 
 # Bugfixes
 
