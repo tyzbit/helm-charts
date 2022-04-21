@@ -253,6 +253,15 @@ entries:
     version: 0.1.0
   inspector:
   - apiVersion: v2
+    created: "2022-04-21T21:57:21.966460475Z"
+    description: Inspector uses his gadgets to inspect whatever you want!
+    digest: 42c43ede025f98d3ecc89ae3709c40b1b07ae03e6a0f8ac8ccbe020f10c143a4
+    name: inspector
+    type: application
+    urls:
+    - https://github.com/tyzbit/helm-charts/releases/download/inspector-1.0.0/inspector-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
     appVersion: latest
     created: "2022-03-19T22:08:43.051582818Z"
     description: Inspector uses his gadgets to inspect whatever you want!
@@ -529,4 +538,4 @@ entries:
     urls:
     - https://github.com/tyzbit/helm-charts/releases/download/tplink-0.2.13/tplink-0.2.13.tgz
     version: 0.2.13
-generated: "2022-04-21T04:37:53.5291004Z"
+generated: "2022-04-21T21:57:21.966804575Z"
