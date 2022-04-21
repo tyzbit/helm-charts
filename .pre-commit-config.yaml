@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/tyzbit/helm-charts
-    rev: pre-commit-0.2.0
+    rev: pre-commit-0.3.0
     hooks:
       - id: helm-docs
         args:

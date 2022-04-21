@@ -1,9 +1,9 @@
 namespaceOverride: ""
 
-# Default job concurrency
+# -- Default job concurrency
 defaultConcurrency: 4
 
-# Whether or not to spread the jobs so that the start times are "randomized" (actually deterministic)
+# -- Whether or not to spread the jobs so that the start times are "randomized" (actually deterministic).
 # If this is false, minutes and hours in generated cron expressions will be 0
 # Examples if true:
 # "15/30 * * * *"
@@ -13,21 +13,22 @@ defaultConcurrency: 4
 # "0 0/2 * * *"
 spreadCronStartTimes: true
 
-# How separated should the minutes and hours be on the generated cron expressions
+# -- How separated should the minutes and hours be on the generated cron expressions.
 # Example: if minuteStep: 5, then the cron expression will be like "0/10 * * * *", "5/10 * * * *"
 minuteStep: 5
 hourStep: 2
 
-# Optionally create storageclasses for each group
+# -- Optionally create storageclasses for each group.
 # This is disabled by default because the Helm release will fail if
-# an upgrade is run and it tries to remove an in-use StorageClass
+# an upgrade is run and it tries to remove an in-use StorageClass.
 createStorageClasses: false
 
-# Default StorageClass properties
+# -- Default StorageClass properties.
 allowVolumeExpansion: true
 reclaimPolicy: Retain
 
-# Longhorn-specific parameters
+# -- Longhorn-specific parameters.
+# @default -- See values.yaml for an example
 parameters: {}
   # replicaAutoBalance: "ignored"
   # dataLocality: "disabled"

@@ -4,8 +4,8 @@
 
 # Enhancements
 
-**None**
+- Autogenerate README
 
 # Bugfixes
 
-- Fix deploymentAnnotations
+**None**

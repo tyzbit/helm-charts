@@ -1,29 +1,33 @@
-# Default values for tplink.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
+# -- Number of replicas
 replicaCount: 1
 
+# -- Array of devices
+# @default -- See values.yaml for an example
 devices: []
   # - name: localhost
   #   address: 127.0.0.1
 
 image:
+  # -- Image repository
   repository: zibby/tplink-exporter
+  # -- Image pull policy
   pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
+  # -- Image tag
   tag: "latest"
 
-imagePullSecrets: 
-  - name: docker-hub
+# -- Image pull secrets (example: `[{"name": "secretname"}]`)
+imagePullSecrets: []
 
+# -- Pod annotations
 podAnnotations: {}
-#  linkerd.io/inject: enabled
 
 service:
+  # -- Service type
   type: ClusterIP
+  # -- Service port
   port: 8089
 
+# -- Resource requests and limits
 resources: 
   limits:
     cpu: 100m

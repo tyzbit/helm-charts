@@ -4,8 +4,8 @@
 
 # Enhancements
 
-**None**
+- Autogenerate README
 
 # Bugfixes
 
-- Fix values getting copied over from previously generated groups.
+**None**

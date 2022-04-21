@@ -1,10 +1,10 @@
 # Breaking Changes
 
-Initial Release
+**None**
 
 # Enhancements
 
-**None**
+- Autogenerate README
 
 # Bugfixes
 
