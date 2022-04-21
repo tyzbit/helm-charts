@@ -81,7 +81,7 @@ spec:
             claimName: {{ $pvcName }}
         - name: custom-ini
           configMap:
-            name: {{ $pvcName }}-custom-ini
+            name: {{ include "grav.fullname" . }}-custom-ini
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

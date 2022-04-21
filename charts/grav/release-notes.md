@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-- Fix service
+- Fix ini and filebrowser volumeMounts
