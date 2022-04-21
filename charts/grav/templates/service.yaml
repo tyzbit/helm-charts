@@ -19,3 +19,20 @@ spec:
   {{- end }}
   selector:
     {{- include "grav.selectorLabels" . | nindent 4 }}
+{{- if .Values.filebrowser.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "grav.fullname" . }}
+  labels:
+    {{- include "grav.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.filebrowser.service.port }}
+      targetPort: {{ .Values.filebrowser.service.port }}
+      protocol: TCP
+      name: fb-http
+  selector:
+    {{- include "filebrowser.selectorLabels" . | nindent 4 }}
+{{- end }}

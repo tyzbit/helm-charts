@@ -4,9 +4,8 @@
 
 # Enhancements
 
-- Set filebrowser up as a StatefulSet
-- Allow specifying an existingClaimName for persistence
+**None**
 
 # Bugfixes
 
-**None**
+- Fix filebrowser SelectorLabels

@@ -13,7 +13,7 @@ spec:
   serviceName: {{ include "grav.fullname" . }}-filebrowser
   selector:
     matchLabels:
-      {{- include "grav.selectorLabels" . | nindent 6 }}
+      {{- include "filebrowser.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -21,7 +21,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "grav.selectorLabels" . | nindent 8 }}
+        {{- include "filebrowser.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

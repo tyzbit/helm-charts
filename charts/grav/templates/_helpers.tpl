@@ -49,6 +49,10 @@ Selector labels
 app.kubernetes.io/name: {{ include "grav.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+{{- define "filebrowser.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "grav.name" . }}-filebrowser
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
 
 {{/*
 Create the name of the service account to use
