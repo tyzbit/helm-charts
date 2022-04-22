@@ -72,7 +72,7 @@ You can also specify `subdomain`.
 | persistence.storageClass | string | `""` | Kubernetes StorageClass for the PersistentVolume |
 | podAnnotations | object | `{}` | Annotations for the grav container |
 | podSecurityContext | object | `{}` | Security context for the grav container |
-| replicaCount | int | `1` | How many replicas of Grav |
+| replicaCount | int | `1` | How many deployment pods for Grav |
 | securityContext | object | `{}` | Security context for all containers in the pod |
 | service.type | string | `"ClusterIP"` | Service type for the grav frontend service |
 | statefulSetAnnotations | object | `{}` | Annotations to add to the statefulset (filebrowser) |
