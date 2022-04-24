@@ -9,7 +9,7 @@ image:
   # -- Image tag
   tag: "firefox"
 
-# -- Environment variables
+# Environment variables
 env:
   # -- Screen resolution (resolution)@(fps)
   NEKO_SCREEN: 1920x1080@30

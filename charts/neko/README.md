@@ -2,7 +2,7 @@
 
 Share a web browser and react with friends
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.4.1](https://img.shields.io/badge/Version-0.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Installing the Chart
 
@@ -16,7 +16,6 @@ helm install example tyzbit/neko -f your-values.yaml
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Pod affinity |
-| env | object | `{"NEKO_EPR":"52000-52100","NEKO_PASSWORD":"neko","NEKO_PASSWORD_ADMIN":"admin","NEKO_SCREEN":"1920x1080@30"}` | Environment variables |
 | env.NEKO_EPR | string | `"52000-52100"` | Port range for Neko |
 | env.NEKO_PASSWORD | string | `"neko"` | Default password for general users |
 | env.NEKO_PASSWORD_ADMIN | string | `"admin"` | Default password for administrators |
