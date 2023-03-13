@@ -2,7 +2,7 @@
 
 Longhorn Recurring Jobs Generator
 
-![Version: 2.1.0](https://img.shields.io/badge/Version-2.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 3.0.0](https://img.shields.io/badge/Version-3.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Installing the Chart
 
@@ -18,6 +18,7 @@ helm install example tyzbit/longhorn-recurring-jobs -f your-values.yaml
 | allowVolumeExpansion | bool | `true` | Default StorageClass properties. |
 | createStorageClasses | bool | `false` | Optionally create storageclasses for each group. This is disabled by default because the Helm release will fail if an upgrade is run and it tries to remove an in-use StorageClass. |
 | defaultConcurrency | int | `4` | Default job concurrency |
+| defaultRetain | int | `0` | Default retention (has no effect on snapshot-cleanup and snapshot-delete task types) |
 | hourStep | int | `2` |  |
 | minuteStep | int | `5` | How separated should the minutes and hours be on the generated cron expressions. Example: if minuteStep: 5, then the cron expression will be like "0/10 * * * *", "5/10 * * * *" |
 | namespaceOverride | string | `""` |  |
