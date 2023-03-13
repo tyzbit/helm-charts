@@ -1,7 +1,6 @@
 # Breaking Changes
 
-- `default` renamed to `options`, storageclass options put in `storageclass` under
-  `options` key.
+- Use parenthesis when looking up values that may not exist
 
 # Enhancements
 

@@ -2,7 +2,7 @@
 
 Longhorn Recurring Jobs Generator
 
-![Version: 4.0.0](https://img.shields.io/badge/Version-4.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 5.0.0](https://img.shields.io/badge/Version-5.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Installing the Chart
 
@@ -18,6 +18,7 @@ helm install example tyzbit/longhorn-recurring-jobs -f your-values.yaml
 | createStorageClasses | bool | `true` | Optionally create storageclasses for each group. This is disabled by default because the Helm release will fail if an upgrade is run and it tries to remove an in-use StorageClass. |
 | defaultConcurrency | int | `4` | Default job concurrency |
 | defaultRetain | int | `0` | Default retention (has no effect on snapshot-cleanup and snapshot-delete task types) |
+| groups | object | `{"ExampleGroup":{"backup":[{"interval":"1h","retain":5},{"interval":"6h","retain":4}],"options":{"parameters":{"dataLocality":"best-effort","numberOfReplicas":"2","replicaAutoBalance":"best-effort","staleReplicaTimeout":"30"},"storageclass":{"allowVolumeExpansion":true,"reclaimPolicy":"Delete"}},"snapshot":[{"concurrency":10,"interval":"10m","retain":6}],"snapshot-cleanup":[{"interval":"1h"}],"snapshot-delete":[{"interval":"1h"}]},"ExampleGroupTwo":{"backup":[{"interval":"1d","retain":4}],"snapshot":[{"interval":"1h","retain":6}]}}` | --------------------------- # Uncomment this section to see an example configuration with comments. # Group names must start and end with alphanumeric characters # Group names can only have [A-Za-z0-9\-_.] or [A-Za-z0-9\-] if creating StorageClasses |
 | hourStep | int | `2` |  |
 | minuteStep | int | `5` | How separated should the minutes and hours be on the generated cron expressions. Example: if minuteStep: 5, then the cron expression will be like "0/10 * * * *", "5/10 * * * *" |
 | namespaceOverride | string | `""` |  |
