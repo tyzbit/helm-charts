@@ -1,6 +1,6 @@
 # Breaking Changes
 
-- Use parenthesis when looking up values that may not exist
+**None**
 
 # Enhancements
 
@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-**None**
+- Fix property lookups for nonexistent properties
