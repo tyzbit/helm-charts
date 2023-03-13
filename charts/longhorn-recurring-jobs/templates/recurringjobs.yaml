@@ -9,7 +9,7 @@
 {{- /* First round, populate $generatedJobs and $generatedGroups */}}
 {{- range $groupName, $groupSettings := .Values.groups -}}
   {{- range $jobType, $job := $groupSettings -}}
-    {{- if not (eq $jobType "default") -}}
+    {{- if not (eq $jobType "options") -}}
       {{- range $job -}}
         {{- $concurrency := ( .concurrency | default $.Values.defaultConcurrency ) -}}
         {{- $retain := ( .retain | default $.Values.defaultRetain ) -}}
@@ -38,7 +38,7 @@
 {{- /* Second round, calculate cron expressions for the jobs based on how many jobs there are */}}
 {{- range $groupName, $groupSettings := .Values.groups -}}
   {{- range $jobType, $job := $groupSettings -}}
-    {{- if not (eq $jobType "default") -}}
+    {{- if not (eq $jobType "options") -}}
       {{- range $job -}}
         {{- $concurrency := ( .concurrency | default $.Values.defaultConcurrency ) -}}
         {{- $retain := ( .retain | default $.Values.defaultRetain ) -}}

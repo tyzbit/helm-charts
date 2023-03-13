@@ -1,6 +1,7 @@
 # Breaking Changes
 
-**None**
+- `default` renamed to `options`, storageclass options put in `storageclass` under
+  `options` key.
 
 # Enhancements
 
@@ -8,4 +9,4 @@
 
 # Bugfixes
 
-- Minor doc update
+**None**

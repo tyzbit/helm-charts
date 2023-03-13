@@ -23,11 +23,12 @@ hourStep: 2
 # -- Optionally create storageclasses for each group.
 # This is disabled by default because the Helm release will fail if
 # an upgrade is run and it tries to remove an in-use StorageClass.
-createStorageClasses: false
+createStorageClasses: true
 
-# -- Default StorageClass properties.
-allowVolumeExpansion: true
-reclaimPolicy: Retain
+storageclass:
+  # -- Default StorageClass properties.
+  allowVolumeExpansion: true
+  reclaimPolicy: Retain
 
 # -- Longhorn-specific parameters.
 # @default -- See values.yaml for an example
@@ -37,17 +38,19 @@ parameters:
   # dataLocality: "disabled"
   # numberOfReplicas: "3"
   # staleReplicaTimeout: "2880"
+# -----------------------------
 # # Uncomment this section to see an example configuration with comments.
 # # Group names must start and end with alphanumeric characters
 # # Group names can only have [A-Za-z0-9\-_.] or [A-Za-z0-9\-] if creating StorageClasses
 # groups:
 #   # Quoting isn't required, but improves readability
 #   "ExampleGroup":
-#     default:
-#       # You may override these properties for the storage classes for this group
-#       # This only takes effect if createStorageClasses is true
-#       allowVolumeExpansion: true
-#       reclaimPolicy: Delete
+#     options:
+#       storageclass:
+#         # You may override these properties for the storage classes for this group
+#         # This only takes effect if createStorageClasses is true
+#         allowVolumeExpansion: true
+#         reclaimPolicy: Delete
 #       # You can specify longhorn-specific parameters under this key
 #       parameters:
 #         replicaAutoBalance: "best-effort"
