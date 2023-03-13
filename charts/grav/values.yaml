@@ -37,11 +37,19 @@ grav:
     liveness:
       # -- Initial delay for the liveness probe
       initialDelaySeconds: 10
+      # -- Failure threshold
+      failureThreshold: 30
+      # -- How many seconds between probes
+      periodSeconds: 2
       # -- Probe timeout
       timeoutSeconds: 2
     readiness:
       # -- Initial delay for the readiness probe
       initialDelaySeconds: 10
+      # -- Failure threshold
+      failureThreshold: 30
+      # -- How many seconds between probes
+      periodSeconds: 2
       # -- Probe timeout
       timeoutSeconds: 2
 
@@ -50,7 +58,8 @@ grav:
     port: 80
 
   # -- Resource limits for the grav container
-  resources: {}
+  resources:
+    {}
     # We usually recommend not to specify default resources and to leave this as a conscious
     # choice for the user. This also increases chances charts run on environments with little
     # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -85,7 +94,7 @@ filebrowser:
     tag: v2
 
   # -- Arguments for the filebrowser container
-  args: ["-p","8000","-d","/db/database.db"]
+  args: ["-p", "8000", "-d", "/db/database.db"]
 
   # -- What subdomain filebrowser should be available at
   subdomain: files
@@ -136,11 +145,13 @@ statefulSetAnnotations: {}
 podAnnotations: {}
 
 # -- Security context for the grav container
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # fsGroup: 2000
 
 # -- Security context for all containers in the pod
-securityContext: {}
+securityContext:
+  {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -160,10 +171,11 @@ ingress:
   className: ""
 
   # -- Annotations for the ingress
-  annotations: {}
+  annotations:
+    {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
-    
+
   hosts:
     - # -- Hostname for the grav site
       host: chart-example.local

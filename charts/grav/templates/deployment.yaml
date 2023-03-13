@@ -60,12 +60,16 @@ spec:
               port: http
           livenessProbe:
             initialDelaySeconds: {{ .Values.grav.probes.liveness.initialDelaySeconds }}
+            failureThreshold: {{ .Values.grav.probes.liveness.failureThreshold }}
+            periodSeconds: {{ .Values.grav.probes.liveness.periodSeconds }}
             timeoutSeconds: {{ .Values.grav.probes.liveness.timeoutSeconds }}
             httpGet:
               path: /
               port: http
           readinessProbe:
             initialDelaySeconds: {{ .Values.grav.probes.readiness.initialDelaySeconds }}
+            failureThreshold: {{ .Values.grav.probes.readiness.failureThreshold }}
+            periodSeconds: {{ .Values.grav.probes.readiness.periodSeconds }}
             timeoutSeconds: {{ .Values.grav.probes.readiness.timeoutSeconds }}
             httpGet:
               path: /

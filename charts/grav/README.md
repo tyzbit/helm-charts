@@ -2,7 +2,7 @@
 
 Modern, Crazy Fast, Ridiculously Easy and Amazingly Powerful Flat-File CMS powered by PHP, Markdown, Twig, and Symfony
 
-![Version: 0.7.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.8.0](https://img.shields.io/badge/Version-0.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Installing the Chart
 
@@ -45,9 +45,13 @@ You can also specify `subdomain`.
 | grav.image.tag | string | `"latest"` | Docker image tag to deploy for grav, `admin` installs grav with the admin plugin |
 | grav.nodeSelector | object | `{}` | Specify a specific node to run grav on |
 | grav.probes.enabled | bool | `true` | Enable startup, readiness and liveness probes for grav |
+| grav.probes.liveness.failureThreshold | int | `30` | Failure threshold |
 | grav.probes.liveness.initialDelaySeconds | int | `10` | Initial delay for the liveness probe |
+| grav.probes.liveness.periodSeconds | int | `2` | How many seconds between probes |
 | grav.probes.liveness.timeoutSeconds | int | `2` | Probe timeout |
+| grav.probes.readiness.failureThreshold | int | `30` | Failure threshold |
 | grav.probes.readiness.initialDelaySeconds | int | `10` | Initial delay for the readiness probe |
+| grav.probes.readiness.periodSeconds | int | `2` | How many seconds between probes |
 | grav.probes.readiness.timeoutSeconds | int | `2` | Probe timeout |
 | grav.probes.startup.failureThreshold | int | `30` | Failure threshold |
 | grav.probes.startup.initialDelaySeconds | int | `10` | Initial delay for the startup probe |

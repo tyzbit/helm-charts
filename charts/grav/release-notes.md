@@ -4,8 +4,8 @@
 
 # Enhancements
 
-**None**
+- More probe settings
 
 # Bugfixes
 
-- Documentation update
+**None**
