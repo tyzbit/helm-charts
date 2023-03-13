@@ -20,7 +20,7 @@
         {{- $jobProperties := dict -}}
         {{- $_ := set $jobProperties "interval" .interval -}}
         {{- $_ := set $jobProperties "jobType" $jobType -}}
-        {{- $_ := set $jobProperties "retain" ( .retain | default 0 ) -}}
+        {{- $_ := set $jobProperties "retain" $retain -}}
         {{- $_ := set $jobProperties "concurrency" $concurrency -}}
 
         {{- $_ := set $generatedJobs $jobName $jobProperties -}}
