@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-- Use retain variable in the correct place
+- Minor doc update

@@ -54,7 +54,7 @@ parameters:
 #         dataLocality: "best-effort"
 #         numberOfReplicas: "2"
 #         staleReplicaTimeout: "30"
-#     # At least one of either "snapshot" or "backup" is required.
+#     # At least one task type is required.
 #     snapshot:
 #       - interval: 10m
 #         retain: 6
