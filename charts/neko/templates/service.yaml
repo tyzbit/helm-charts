@@ -15,6 +15,16 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+  {{- with .Values.env.NEKO_UDPMUX }}
+    - name: udpmux
+      containerPort: {{ . }}
+      protocol: UDP
+  {{- end }}
+  {{- with .Values.env.NEKO_TCPMUX }}
+    - name: tcpmux
+      containerPort: {{ . }}
+      protocol: TCP
+  {{- end }}
   selector:
     {{- include "neko.selectorLabels" . | nindent 4 }}
 {{- if .Values.env.NEKO_EPR }}
@@ -44,16 +54,6 @@ spec:
         port: {{ $port }}
         targetPort: {{ $port }}
         protocol: UDP
-    {{- end }}
-    {{- with .Values.env.NEKO_UDPMUX }}
-      - name: udpmux
-        containerPort: {{ . }}
-        protocol: UDP
-    {{- end }}
-    {{- with .Values.env.NEKO_TCPMUX }}
-      - name: tcpmux
-        containerPort: {{ . }}
-        protocol: TCP
     {{- end }}
   selector:
     {{- include "neko.selectorLabels" . | nindent 4 }}
