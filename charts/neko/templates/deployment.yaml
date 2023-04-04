@@ -62,14 +62,14 @@ spec:
               protocol: UDP
           {{- end }}
           {{- end }}
-          {{- if .Values.env.NEKO_UDPMUX }}
+          {{- with .Values.env.NEKO_UDPMUX }}
             - name: udpmux
-              containerPort: {{ .Values.env.NEKO_UDPMUX }}
+              containerPort: {{ . }}
               protocol: UDP
           {{- end }}
-          {{- if .Values.env.NEKO_TCPMUX }}
+          {{- with .Values.env.NEKO_TCPMUX }}
             - name: tcpmux
-              containerPort: {{ .Values.env.NEKO_TCPMUX }}
+              containerPort: {{ . }}
               protocol: TCP
           {{- end }}
           livenessProbe:
