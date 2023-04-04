@@ -62,6 +62,16 @@ spec:
               protocol: UDP
           {{- end }}
           {{- end }}
+          {{- if .Values.env.NEKO_UDPMUX }}
+            - name: udpmux
+              containerPort: {{ .Values.env.NEKO_UDPMUX }}
+              protocol: UDP
+          {{- end }}
+          {{- if .Values.env.NEKO_TCPMUX }}
+            - name: tcpmux
+              containerPort: {{ .Values.env.NEKO_TCPMUX }}
+              protocol: TCP
+          {{- end }}
           livenessProbe:
             httpGet:
               path: /

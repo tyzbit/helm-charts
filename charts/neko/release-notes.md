@@ -4,8 +4,8 @@
 
 # Enhancements
 
-**None**
+- TCP and UDP Mux
 
 # Bugfixes
 
-Fix deployment ports
+**None**

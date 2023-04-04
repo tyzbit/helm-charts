@@ -19,6 +19,10 @@ env:
   NEKO_PASSWORD_ADMIN: admin
   # -- Port range for Neko, if you enable reverse proxying you won't need it.
   # NEKO_EPR: 52000-52100
+  # -- UDPMUX port for all streams
+  # NEKO_UDPMUX: 52100
+  # -- TCPMUX port for all streams
+  # NEKO_TCPMUX: 52100
 
 # -- Use an existing secret with environment variables for Neko
 existingSecret: ""
