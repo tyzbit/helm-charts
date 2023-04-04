@@ -17,12 +17,14 @@ spec:
       name: http
   {{- with .Values.env.NEKO_UDPMUX }}
     - name: udpmux
-      containerPort: {{ . }}
+      port: {{ .}}
+      targetPort: {{ . }}
       protocol: UDP
   {{- end }}
   {{- with .Values.env.NEKO_TCPMUX }}
     - name: tcpmux
-      containerPort: {{ . }}
+      port: {{ . }}
+      targetPort: {{ . }}
       protocol: TCP
   {{- end }}
   selector:
