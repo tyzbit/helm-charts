@@ -4,7 +4,7 @@
 
 # Enhancements
 
-- Autogenerate README
+- Support reverse proxy mode where you don't need to forward ports.
 
 # Bugfixes
 

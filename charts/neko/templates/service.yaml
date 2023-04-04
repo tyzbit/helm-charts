@@ -17,6 +17,7 @@ spec:
       name: http
   selector:
     {{- include "neko.selectorLabels" . | nindent 4 }}
+{{- if .Values.env.NEKO_EPR }}
 ---
 apiVersion: v1
 kind: Service
@@ -46,3 +47,4 @@ spec:
     {{- end }}
   selector:
     {{- include "neko.selectorLabels" . | nindent 4 }}
+{{- end }}
