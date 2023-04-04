@@ -4,8 +4,8 @@
 
 # Enhancements
 
-- Support reverse proxy mode where you don't need to forward ports.
+**None**
 
 # Bugfixes
 
-**None**
+Fix deployment ports

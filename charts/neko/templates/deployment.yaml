@@ -53,12 +53,14 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+          {{- if .Values.env.NEKO_EPR }}
           {{- $start := atoi (regexFind "[0-9]+" .Values.env.NEKO_EPR) -}}
           {{- $end := atoi (trimPrefix "-" (regexFind "-[0-9]+" .Values.env.NEKO_EPR)) -}}
           {{- range $port := untilStep $start $end 1 }}
             - name: udp{{ $port }}
               containerPort: {{ $port }}
               protocol: UDP
+          {{- end }}
           {{- end }}
           livenessProbe:
             httpGet:
