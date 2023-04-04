@@ -15,12 +15,6 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
-  {{- with .Values.env.NEKO_UDPMUX }}
-    - name: udpmux
-      port: {{ .}}
-      targetPort: {{ . }}
-      protocol: UDP
-  {{- end }}
   {{- with .Values.env.NEKO_TCPMUX }}
     - name: tcpmux
       port: {{ . }}
@@ -29,7 +23,7 @@ spec:
   {{- end }}
   selector:
     {{- include "neko.selectorLabels" . | nindent 4 }}
-{{- if .Values.env.NEKO_EPR }}
+{{- if or (.Values.env.NEKO_EPR .Values.env.NEKO_UDPMUX)}}
 ---
 apiVersion: v1
 kind: Service
@@ -49,12 +43,20 @@ spec:
   {{- end }}
   {{- end }}
   ports:
-    {{- $start := atoi (regexFind "[0-9]+" .Values.env.NEKO_EPR) -}}
-    {{- $end := atoi (trimPrefix "-" (regexFind "-[0-9]+" .Values.env.NEKO_EPR)) -}}
+    {{- with .Values.env.NEKO_EPR }}
+    {{- $start := atoi (regexFind "[0-9]+" . ) -}}
+    {{- $end := atoi (trimPrefix "-" (regexFind "-[0-9]+" .)) -}}
     {{- range $port := untilStep $start $end 1 }}
       - name: udp{{ $port }}
         port: {{ $port }}
         targetPort: {{ $port }}
+        protocol: UDP
+    {{- end }}
+    {{- end }}
+    {{- with .Values.env.NEKO_UDPMUX }}
+      - name: udpmux
+        port: {{ .}}
+        targetPort: {{ . }}
         protocol: UDP
     {{- end }}
   selector:
