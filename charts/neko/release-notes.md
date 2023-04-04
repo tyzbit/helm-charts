@@ -4,8 +4,8 @@
 
 # Enhancements
 
-**None**
+- Switch to official Github registry
 
 # Bugfixes
 
-- Fix service
+**None**

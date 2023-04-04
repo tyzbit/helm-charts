@@ -2,7 +2,7 @@
 
 Share a web browser and react with friends
 
-![Version: 0.6.7](https://img.shields.io/badge/Version-0.6.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.7.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Installing the Chart
 
@@ -22,8 +22,8 @@ helm install example tyzbit/neko -f your-values.yaml
 | existingSecret | string | `""` | Use an existing secret with environment variables for Neko |
 | fullnameOverride | string | `""` | Full name override |
 | image.pullPolicy | string | `"Always"` | Docker pull policy |
-| image.repository | string | `"m1k1o/neko"` | Image repository |
-| image.tag | string | `"firefox"` | Image tag |
+| image.repository | string | `"ghcr.io/m1k1o/neko/firefox"` | Image repository |
+| image.tag | string | `"latest"` | Image tag |
 | imagePullSecrets | list | `[]` | Docker image pull secrets |
 | ingress.annotations | object | `{}` | Annotations for the ingress |
 | ingress.className | string | `""` | Ingress class |

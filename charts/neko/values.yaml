@@ -3,11 +3,11 @@ replicaCount: 1
 
 image:
   # -- Image repository
-  repository: m1k1o/neko
+  repository: ghcr.io/m1k1o/neko/firefox
   # -- Docker pull policy
   pullPolicy: Always
   # -- Image tag
-  tag: "firefox"
+  tag: latest
 
 # Environment variables
 env:
