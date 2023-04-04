@@ -23,7 +23,7 @@ spec:
   {{- end }}
   selector:
     {{- include "neko.selectorLabels" . | nindent 4 }}
-{{- if or (.Values.env.NEKO_EPR .Values.env.NEKO_UDPMUX)}}
+{{- if and (unset .Values.env.NEKO_EPR) (unset .Values.env.NEKO_UDPMUX))}}
 ---
 apiVersion: v1
 kind: Service
