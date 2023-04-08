@@ -2,7 +2,7 @@
 
 kube-metrics-adapter helm chart
 
-![Version: 0.1.11-1](https://img.shields.io/badge/Version-0.1.11--1-informational?style=flat-square)
+![Version: 0.1.12](https://img.shields.io/badge/Version-0.1.12-informational?style=flat-square)
 
 ## Installing the Chart
 
@@ -53,7 +53,7 @@ helm install example tyzbit/kube-metrics-adapter -f your-values.yaml
 | prometheus.server | string | `"http://prometheus.kube-system.svc.cluster.local"` |  |
 | registry.image | string | `"registry.opensource.zalan.do/teapot/kube-metrics-adapter"` |  |
 | registry.imagePullPolicy | string | `"IfNotPresent"` |  |
-| registry.imageTag | string | `"v0.1.9"` |  |
+| registry.imageTag | string | `"v0.1.17"` |  |
 | replicas | int | `1` |  |
 | requestHeader.allowedNames | string | `nil` |  |
 | requestHeader.clientCaFile | string | `nil` |  |
