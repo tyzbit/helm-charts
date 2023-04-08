@@ -313,6 +313,19 @@ entries:
     version: 0.4.0
   kube-metrics-adapter:
   - apiVersion: v2
+    created: "2023-04-08T04:44:34.49375922Z"
+    description: kube-metrics-adapter helm chart
+    digest: b37ef8c76a6fef46c94b2619c8447a4bacdd8ee540f5184f3e87ce2dc280b733
+    home: https://github.com/zalando-incubator/kube-metrics-adapter
+    maintainers:
+    - email: opensource@zalando.de
+      name: The Zalando Incubator
+      url: https://github.com/zalando-incubator
+    name: kube-metrics-adapter
+    urls:
+    - https://github.com/tyzbit/helm-charts/releases/download/kube-metrics-adapter-0.1.12/kube-metrics-adapter-0.1.12.tgz
+    version: 0.1.12
+  - apiVersion: v2
     created: "2022-04-21T22:42:06.465109116Z"
     description: kube-metrics-adapter helm chart
     digest: 9f92828645f260c6377406b47fb3aa16aa44c9b96ec4dbe1877131cd7e952683
@@ -802,4 +815,4 @@ entries:
     urls:
     - https://github.com/tyzbit/helm-charts/releases/download/tplink-0.2.13/tplink-0.2.13.tgz
     version: 0.2.13
-generated: "2023-04-04T03:41:18.454841892Z"
+generated: "2023-04-08T04:44:34.494098923Z"
