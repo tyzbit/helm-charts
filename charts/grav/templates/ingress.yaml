@@ -42,7 +42,7 @@ spec:
   rules:
     {{- range .Values.ingress.hosts }}
     {{- if $.Values.filebrowser.enabled }}
-    {{- if not (regexMatch "\*\." .host) }}
+    {{- if not (regexMatch "\\*\\." .host) }}
     - host: {{ printf "%s.%s" $.Values.filebrowser.subdomain .host | quote }}
       http:
         paths:
