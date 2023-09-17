@@ -40,6 +40,23 @@ spec:
     {{- end }}
   {{- end }}
   rules:
+    {{- if $.Values.filebrowser.enabled }}
+    - host: {{ printf "%s.%s" $.Values.filebrowser.subdomain .host | quote }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $fullName }}-filebrowser
+                port:
+                  number: {{ $.Values.filebrowser.service.port }}
+              {{- else }}
+              serviceName: {{ $fullName }}-filebrowser
+              servicePort: {{ $.Values.filebrowser.service.port }}
+              {{- end }}
+    {{- end }}
     {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
       http:
@@ -60,22 +77,5 @@ spec:
               servicePort: {{ $svcPort }}
               {{- end }}
           {{- end }}
-    {{- if $.Values.filebrowser.enabled }}
-    - host: {{ printf "%s.%s" $.Values.filebrowser.subdomain .host | quote }}
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
-              service:
-                name: {{ $fullName }}-filebrowser
-                port:
-                  number: {{ $.Values.filebrowser.service.port }}
-              {{- else }}
-              serviceName: {{ $fullName }}-filebrowser
-              servicePort: {{ $.Values.filebrowser.service.port }}
-              {{- end }}
-    {{- end }}
     {{- end }}
 {{- end }}

@@ -4,8 +4,8 @@
 
 # Enhancements
 
-- More probe settings
+**None**
 
 # Bugfixes
 
-**None**
+Put filebrowser first in the Ingress in case of wildcards
