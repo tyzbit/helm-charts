@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-Filebrowser ingress rules outside of range
+Disable files ingress for hosts with wildcard
