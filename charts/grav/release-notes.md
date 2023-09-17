@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-Rebuild 0.8.1
+Filebrowser ingress rules outside of range

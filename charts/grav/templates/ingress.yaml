@@ -40,6 +40,7 @@ spec:
     {{- end }}
   {{- end }}
   rules:
+    {{- range .Values.ingress.hosts }}
     {{- if $.Values.filebrowser.enabled }}
     - host: {{ printf "%s.%s" $.Values.filebrowser.subdomain .host | quote }}
       http:
@@ -57,7 +58,6 @@ spec:
               servicePort: {{ $.Values.filebrowser.service.port }}
               {{- end }}
     {{- end }}
-    {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
       http:
         paths:
