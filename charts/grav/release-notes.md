@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-Put filebrowser first in the Ingress in case of wildcards
+Rebuild 0.8.1
