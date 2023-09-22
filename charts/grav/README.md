@@ -2,7 +2,7 @@
 
 Modern, Crazy Fast, Ridiculously Easy and Amazingly Powerful Flat-File CMS powered by PHP, Markdown, Twig, and Symfony
 
-![Version: 0.8.5](https://img.shields.io/badge/Version-0.8.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.9.0](https://img.shields.io/badge/Version-0.9.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Installing the Chart
 
@@ -41,7 +41,7 @@ You can also specify `subdomain`.
 | grav.config | object | `{}` | Specify environment variables (in key: "value" notation) |
 | grav.customPHPini | string | `"upload_max_filesize = 256M\npost_max_size = 256M"` | Custom PHP parameters |
 | grav.image.pullPolicy | string | `"IfNotPresent"` | Kubernetes imagePullPolicy for the grav container |
-| grav.image.repository | string | `"tyzbit/grav"` | Docker image repo for the grav image |
+| grav.image.repository | string | `"dsavell/grav"` | Docker image repo for the grav image |
 | grav.image.tag | string | `"latest"` | Docker image tag to deploy for grav, `admin` installs grav with the admin plugin |
 | grav.nodeSelector | object | `{}` | Specify a specific node to run grav on |
 | grav.probes.enabled | bool | `true` | Enable startup, readiness and liveness probes for grav |

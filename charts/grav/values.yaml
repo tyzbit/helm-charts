@@ -8,7 +8,7 @@ replicaCount: 1
 grav:
   image:
     # -- Docker image repo for the grav image
-    repository: tyzbit/grav
+    repository: dsavell/grav
     # -- Kubernetes imagePullPolicy for the grav container
     pullPolicy: IfNotPresent
     # -- Docker image tag to deploy for grav, `admin` installs grav with the admin plugin

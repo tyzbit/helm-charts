@@ -4,8 +4,8 @@
 
 # Enhancements
 
-**None**
+Use dsavell's grav image by default.
 
 # Bugfixes
 
-I got 99 problems and a backslash IS one
+**None**
