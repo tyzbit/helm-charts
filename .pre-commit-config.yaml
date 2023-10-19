@@ -1,8 +1,11 @@
 repos:
-  - repo: https://github.com/tyzbit/helm-charts
-    rev: pre-commit-0.3.0
+  - repo: local
     hooks:
       - id: helm-docs
+        name: Helm Docs
+        description: Uses 'helm-docs' to create documentation from the Helm chart's 'values.yaml' file, and inserts the result into a corresponding 'README.md' file.
+        language: script
+        entry: .pre-commit/helm-docs
         args:
           # Make the tool search for charts only under the `example-charts` directory
           - --chart-search-root=charts
@@ -13,3 +16,4 @@ repos:
           # Repeating the flag adds this to the list, now [./_templates.gotmpl, README.md.gotmpl]
           # A base filename makes it relative to each chart directory found
           - --template-files=README.md.gotmpl
+        files: (README\.md\.gotmpl|(Chart|requirements|values)\.yaml)$
