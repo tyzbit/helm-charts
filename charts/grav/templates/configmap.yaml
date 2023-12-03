@@ -5,3 +5,14 @@ metadata:
 data:
   99-custom.ini: |-
 {{- .Values.grav.customPHPini | nindent 4 }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "grav.fullname" . }}-scheduler
+data:
+  scheduler.yaml: |
+    status:
+      cache-purge: {{ if .Values.grav.cache_purge -}}enabled{{- else -}}disabled{{- end }}
+      cache-clear: {{ if .Values.grav.cache_clear -}}enabled{{- else -}}disabled{{- end }}
+      default-site-backup: {{ if .Values.grav.default_site_backup -}}enabled{{- else -}}disabled{{- end }}

@@ -19,6 +19,11 @@ grav:
     upload_max_filesize = 256M
     post_max_size = 256M
 
+  # -- Enable or disable periodic jobs. These are found in Tools -> Scheduler in the admin UI
+  cache_purche: false
+  cache_clear: false
+  default_site_backup: true
+
   # -- Specify environment variables (in key: "value" notation)
   config: {}
 

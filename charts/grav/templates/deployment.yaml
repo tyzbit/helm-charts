@@ -78,18 +78,21 @@ spec:
           resources:
             {{- toYaml .Values.grav.resources | nindent 12 }}
           volumeMounts:
-            - mountPath: "/var/www/grav/backup"
+            - mountPath: /var/www/grav/backup
               subPath: backup
               name: {{ $pvcName }}
-            - mountPath: "/var/www/grav/logs"
+            - mountPath: /var/www/grav/logs
               subPath: logs
               name: {{ $pvcName }}
-            - mountPath: "/var/www/grav/user"
+            - mountPath: /var/www/grav/user
               subPath: user
               name: {{ $pvcName }}
             - mountPath: /etc/php/7.4/fpm/conf.d/99-custom.ini
               subPath: 99-custom.ini
               name: custom-ini
+            - mountPath: /var/www/grav/user/config/scheduler.yaml
+              subPath: scheduler.yaml
+              name: scheduler
       volumes:
         - name: {{ $pvcName }}
           persistentVolumeClaim:
@@ -97,6 +100,9 @@ spec:
         - name: custom-ini
           configMap:
             name: {{ include "grav.fullname" . }}-custom-ini
+        - name: scheduler
+          configMap:
+            name: {{ include "grav.fullname" . }}-scheduler
       {{- with .Values.grav.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

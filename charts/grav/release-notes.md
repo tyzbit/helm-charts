@@ -4,7 +4,7 @@
 
 # Enhancements
 
-Use dsavell's grav image by default.
+Control scheduler jobs with values.yaml
 
 # Bugfixes
 
