@@ -1,5 +1,0 @@
-apiVersion: v2
-name: inspector
-description: Inspector uses his gadgets to inspect whatever you want!
-type: application
-version: 1.0.0
