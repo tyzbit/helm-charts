@@ -87,7 +87,7 @@ spec:
             - mountPath: /var/www/grav/user
               subPath: user
               name: {{ $pvcName }}
-            - mountPath: /etc/php/7.4/fpm/conf.d/99-custom.ini
+            - mountPath: /etc/php/{{ .Values.grav.phpVersion }}/fpm/conf.d/99-custom.ini
               subPath: 99-custom.ini
               name: custom-ini
             - mountPath: /var/www/grav/user/config/scheduler.yaml

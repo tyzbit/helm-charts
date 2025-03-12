@@ -4,8 +4,8 @@
 
 # Enhancements
 
-Control scheduler jobs with values.yaml
-
 # Bugfixes
+
+Set and allow changing PHP version
 
 **None**

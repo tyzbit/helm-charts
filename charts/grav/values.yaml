@@ -14,6 +14,8 @@ grav:
     # -- Docker image tag to deploy for grav, `admin` installs grav with the admin plugin
     tag: "latest"
 
+  # -- PHP version, needed for paths to PHP config files
+  phpVersion: "8.2"
   # -- Custom PHP parameters
   customPHPini: |-
     upload_max_filesize = 256M
