@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-- Fix property lookups for nonexistent properties
+- Reduce job name length (filesystem-trim put it over 40 characters)

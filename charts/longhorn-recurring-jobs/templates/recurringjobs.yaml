@@ -43,7 +43,7 @@
         {{- $concurrency := ( (.concurrency) | default $.Values.defaultConcurrency ) -}}
         {{- $retain := ( (.retain) | default $.Values.defaultRetain ) -}}
         {{- /* Example $jobName: snapshot-10m-retain-1-concurrency-4 */}}
-        {{- $jobName := printf "%s-%s-retain-%s-concurrency-%s" $jobType .interval ( $retain | toString) ( $concurrency | toString ) -}}
+        {{- $jobName := printf "%s-%s-keep%s-%sthreads" $jobType .interval ( $retain | toString) ( $concurrency | toString ) -}}
 
         {{- $jobProperties := get $generatedJobs $jobName -}}
 
