@@ -436,6 +436,15 @@ entries:
     version: 0.1.10
   longhorn-recurring-jobs:
   - apiVersion: v2
+    created: "2025-06-21T01:54:58.299710312Z"
+    description: Longhorn Recurring Jobs Generator
+    digest: 5e9e4ad581d119405bcae7f24fdc41a2645e6b29dbe3f724013186b94e34c4fc
+    name: longhorn-recurring-jobs
+    type: application
+    urls:
+    - https://github.com/tyzbit/helm-charts/releases/download/longhorn-recurring-jobs-5.0.5/longhorn-recurring-jobs-5.0.5.tgz
+    version: 5.0.5
+  - apiVersion: v2
     created: "2025-05-31T15:45:28.011932398Z"
     description: Longhorn Recurring Jobs Generator
     digest: 39ea39c2b4830b52ca2c468e93b2f09529a3715967a5388a1c42331b69bfb75d
@@ -894,4 +903,4 @@ entries:
     urls:
     - https://github.com/tyzbit/helm-charts/releases/download/tplink-0.2.13/tplink-0.2.13.tgz
     version: 0.2.13
-generated: "2025-05-31T15:45:28.013035177Z"
+generated: "2025-06-21T01:54:58.300321723Z"
