@@ -8,4 +8,4 @@
 
 # Bugfixes
 
-- Fix property lookups for nonexistent properties
+- Change name generation to reduce character length
