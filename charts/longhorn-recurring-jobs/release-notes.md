@@ -4,8 +4,8 @@
 
 # Enhancements
 
-Updated to v1beta2
+**None**
 
 # Bugfixes
 
-**None**
+Bump version for ci
