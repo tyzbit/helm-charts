@@ -4,8 +4,8 @@
 
 # Enhancements
 
-**None**
+Updated to v1beta2
 
 # Bugfixes
 
-- Change name generation to reduce character length
+**None**
